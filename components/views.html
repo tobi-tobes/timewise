@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <header>
+            <div class="logo"></div>
+            <h1>TimeWise</h1>
+            <button class="stats-btn">Stats</button>
+        </header>
+        <main>
+            <!-- Home page -->
+            <section class="homepage" class="visible">
+                <div>
+                    <h2>Choose a timer:</h2>
+                </div>
+                <div class="timers">
+                    <div class="pomodoro preset-timer">Pomodoro</div>
+                    <div class="30-mins preset-timer">30 mins</div>
+                    <div class="1-hr preset-timer">1 hr</div>
+                    <div class="1-hr-30-mins preset-timer">1 hr 30 mins</div>
+                    <div class="2-hrs preset-timer">2 hrs</div>
+                    <div class="2-hrs-30-mins preset-timer">2 hrs 30 mins</div>
+                </div>
+                <button class="custom-timer-btn">Create a custom timer</button>
+            </section>
+            <!-- Timer configuration page -->
+            <section class="time-config" class="hidden">
+                <h2>Set up your timer</h2>
+                <div class="strict-mode-selection">
+                    <h3>Strict mode?</h3>
+                    <div class="strict-mode-toggle"></div>
+                    <p class="appear-when-strict-mode-toggled">If strict mode is on, you will not be able to exit the timer until it ends.</p>
+                </div>
+                <div>
+                    <h3>Type in your site blacklist:</h3>
+                    <textarea name="site-blacklist" id="site-blacklist cols="30" rows="10"></textarea>
+                </div>
+                <button class="start-btn">Start your session (1 hr)</button>
+            </section>
+            <!-- Active timer (non-strict mode) -->
+            <section class="active-timer non-strict" class="hidden">
+                <div class="timer"></div>
+                <div>
+                    <div class="pause-btn">
+                        <div class="pause-symbol"></div>
+                        <div class="play-symbol hidden"></div>
+                    </div>
+                    <p>Take a break</p>
+                </div>
+                <div>
+                    <div class="end-btn"></div>
+                    <p>end</p>
+                </div>
+            </section>
+            <!-- Active timer (strict mode) -->
+            <section class="active-timer strict" class="hidden">
+                <div class="timer">
+                    <div>
+                        <div class="pause-btn"></div>
+                    </div>
+                    <p class="words-of-affirmation"></p>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
