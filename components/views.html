@@ -14,13 +14,13 @@
                 <div>
                     <h2>Choose a timer:</h2>
                 </div>
-                <div class="timers">
-                    <div class="pomodoro preset-timer">Pomodoro</div>
-                    <div class="30-mins preset-timer">30 mins</div>
-                    <div class="1-hr preset-timer">1 hr</div>
-                    <div class="1-hr-30-mins preset-timer">1 hr 30 mins</div>
-                    <div class="2-hrs preset-timer">2 hrs</div>
-                    <div class="2-hrs-30-mins preset-timer">2 hrs 30 mins</div>
+                <div class="timers carousel">
+                    <button class="pomodoro preset-timer">Pomodoro</button>
+                    <button class="30-mins preset-timer">30 mins</button>
+                    <button class="1-hr preset-timer">1 hr</button>
+                    <button class="1-hr-30-mins preset-timer">1 hr 30 mins</button>
+                    <button class="2-hrs preset-timer">2 hrs</button>
+                    <button class="2-hrs-30-mins preset-timer">2 hrs 30 mins</button>
                 </div>
                 <button class="custom-timer-btn">Create a custom timer</button>
             </section>
@@ -67,7 +67,16 @@
             <!-- Custom time selection modal -->
             <section class="custom-timer modal hidden">
                 <h3>Create a custom time</h3>
-                <div class="time-selector"></div>
+                <div class="time-picker">
+                    <div class="hour-picker">
+                        <label for="hour">Hour</label>
+                        <select id="hour" class="hour-select"></select>
+                    </div>
+                    <div class="minute-picker">
+                        <label for="minute">Minute</label>
+                        <select id="minute" class="minute-select"></select>
+                    </div>
+                </div>
                 <button class="modal-btn">SELECT</button>
             </section>
             <!-- Stats modal -->
