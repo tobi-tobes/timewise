@@ -10,7 +10,7 @@
         <main>
             <!-- VIEWS -->
             <!-- Home page -->
-            <section class="homepage" class="visible">
+            <section class="homepage visible">
                 <div>
                     <h2>Choose a timer:</h2>
                 </div>
@@ -25,7 +25,7 @@
                 <button class="custom-timer-btn">Create a custom timer</button>
             </section>
             <!-- Timer configuration page -->
-            <section class="time-config" class="hidden">
+            <section class="time-config hidden">
                 <h2>Set up your timer</h2>
                 <div class="strict-mode-selection">
                     <h3>Strict mode?</h3>
@@ -34,12 +34,12 @@
                 </div>
                 <div>
                     <h3>Type in your site blacklist:</h3>
-                    <textarea name="site-blacklist" id="site-blacklist cols="30" rows="10"></textarea>
+                    <textarea name="site-blacklist" id="site-blacklist" cols="30" rows="10"></textarea>
                 </div>
                 <button class="start-btn">Start your session (1 hr)</button>
             </section>
             <!-- Active timer (non-strict mode) -->
-            <section class="active-timer non-strict" class="hidden">
+            <section class="active-timer non-strict hidden">
                 <div class="timer"></div>
                 <div>
                     <div class="pause-btn">
@@ -54,7 +54,7 @@
                 </div>
             </section>
             <!-- Active timer (strict mode) -->
-            <section class="active-timer strict" class="hidden">
+            <section class="active-timer strict hidden">
                 <div class="timer">
                     <div>
                         <div class="pause-btn"></div>
@@ -65,13 +65,13 @@
 
             <!-- MODALS -->
             <!-- Custom time selection modal -->
-            <section class="custom-timer modal">
+            <section class="custom-timer modal hidden">
                 <h3>Create a custom time</h3>
                 <div class="time-selector"></div>
                 <button class="modal-btn">SELECT</button>
             </section>
             <!-- Stats modal -->
-            <section class="stats modal">
+            <section class="stats modal hidden">
                 <h3>Time spent wisely:</h3>
                 <div class="stats-counter">
                     <p>0 mins today</p>
@@ -80,7 +80,7 @@
                 <button class="modal-btn">DONE</button>
             </section>
             <!-- Timer done modal -->
-            <section class="timer-done modal">
+            <section class="timer-done modal hidden">
                 <h3>00:00:00</h3>
                 <p>You did it!</p>
                 <button class="modal-btn">DONE</button>
