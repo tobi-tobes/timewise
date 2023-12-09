@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head></head>
     <body>
         <header>
             <div class="logo"></div>
             <h1>TimeWise</h1>
-            <button class="stats-btn">Stats</button>
+            <button class="stats-btn">STATS</button>
         </header>
         <main>
+            <!-- VIEWS -->
             <!-- Home page -->
             <section class="homepage" class="visible">
                 <div>
@@ -60,6 +61,29 @@
                     </div>
                     <p class="words-of-affirmation"></p>
                 </div>
+            </section>
+
+            <!-- MODALS -->
+            <!-- Custom time selection modal -->
+            <section class="custom-timer modal">
+                <h3>Create a custom time</h3>
+                <div class="time-selector"></div>
+                <button class="modal-btn">SELECT</button>
+            </section>
+            <!-- Stats modal -->
+            <section class="stats modal">
+                <h3>Time spent wisely:</h3>
+                <div class="stats-counter">
+                    <p>0 mins today</p>
+                    <p>0 mins this week</p>
+                </div>
+                <button class="modal-btn">DONE</button>
+            </section>
+            <!-- Timer done modal -->
+            <section class="timer-done modal">
+                <h3>00:00:00</h3>
+                <p>You did it!</p>
+                <button class="modal-btn">DONE</button>
             </section>
         </main>
     </body>
