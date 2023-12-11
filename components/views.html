@@ -30,18 +30,25 @@
             <section class="time-config hidden">
                 <h3>Set up your timer</h3>
                 <div class="strict-mode-selection">
-                    <p>Strict mode?</p>
-                    <div class="strict-mode-toggle"></div>
+                    <div class="strict-mode-setting">
+                        <p class="strict-mode-label">Strict mode?</p>
+                        <input type="checkbox" name="strict-mode-toggle" id="strict-mode-toggle-cb">
+                        <label for="strict-mode-toggle-cb" class="strict-mode-toggle-label">
+                            <div class="strict-mode-toggle-inner"></div>
+                            <div class="strict-mode-toggle-switch"></div>
+                        </label>
+                    </div>
                     <p class="appear-when-strict-mode-toggled">If strict mode is on, you will not be able to exit the timer until it ends.</p>
                 </div>
                 <div>
-                    <p>Type in your site blacklist:</p>
-                    <textarea name="site-blacklist" id="site-blacklist" cols="30" rows="10"></textarea>
+                    <p class="site-blacklist-label">Type in your site blacklist:</p>
+                    <p>Type in a comma-separated list of the websites you want to block during your session.</p>
+                    <textarea name="site-blacklist" id="site-blacklist" cols="70" rows="6"></textarea>
                 </div>
                 <button class="start-btn">Start your session (1 hr)</button>
             </section>
             <!-- Active timer (non-strict mode) -->
-            <section class="active-timer non-strict hidden">
+            <section class="active-timer non-strict visible">
                 <div class="timer"></div>
                 <div>
                     <div class="pause-btn">
