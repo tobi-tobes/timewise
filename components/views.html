@@ -14,7 +14,7 @@
         <main>
             <!-- VIEWS -->
             <!-- Home page -->
-            <section class="homepage visible">
+            <section class="homepage">
                 <h3>Choose a timer:</h3>
                 <div class="timers carousel">
                     <button class="pomodoro preset-timer">Pomodoro</button>
@@ -48,7 +48,7 @@
                 <button class="start-btn">Start your session (1 hr)</button>
             </section>
             <!-- Active timer (non-strict mode) -->
-            <section class="active-timer non-strict visible">
+            <section class="active-timer non-strict hidden">
                 <h3 class="timer-digital">00:55:59</h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
@@ -65,13 +65,12 @@
                 </div>
             </section>
             <!-- Active timer (strict mode) -->
-            <section class="active-timer strict hidden">
+            <section class="active-timer strict">
                 <h3 class="timer-digital">00:55:59</h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
-                    </div>
                 </div>
-                <p class="words-of-affirmation"></p>
+                <p class="words-of-affirmation">You can do it!</p>
             </section>
 
             <!-- MODALS -->
