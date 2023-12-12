@@ -49,27 +49,29 @@
             </section>
             <!-- Active timer (non-strict mode) -->
             <section class="active-timer non-strict visible">
-                <div class="timer"></div>
-                <div>
-                    <div class="pause-btn">
-                        <div class="pause-symbol"></div>
-                        <div class="play-symbol hidden"></div>
+                <h3 class="timer-digital">00:55:59</h3>
+                <div class="timer-outer">
+                    <div class="timer-inner">
+                        <div class="pause-btn running">
+                            <div class="pause-symbol"></div>
+                            <div class="play-symbol hidden"></div>
+                        </div>
                     </div>
-                    <p>Take a break</p>
                 </div>
-                <div>
+                <p class="pause-label">Take a break</p>
+                <div class="end-container">
                     <div class="end-btn"></div>
-                    <p>end</p>
+                    <p class="end-label">end</p>
                 </div>
             </section>
             <!-- Active timer (strict mode) -->
             <section class="active-timer strict hidden">
-                <div class="timer">
-                    <div>
-                        <div class="pause-btn"></div>
+                <h3 class="timer-digital">00:55:59</h3>
+                <div class="timer-outer">
+                    <div class="timer-inner">
                     </div>
-                    <p class="words-of-affirmation"></p>
                 </div>
+                <p class="words-of-affirmation"></p>
             </section>
 
             <!-- MODALS -->

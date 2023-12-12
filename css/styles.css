@@ -71,6 +71,7 @@ main {
     border-radius: 10px;
     font-weight: var(--font-weight-bold);
     cursor: pointer;
+    color: var(--color-white);
 }
 
 section {
@@ -173,7 +174,7 @@ span {
 
 /* Timer configuration page ============================= */
 .time-config {
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
@@ -248,4 +249,84 @@ span {
 
 #site-blacklist {
     border-radius: 10px;
+}
+
+/* Active timer (non-strict mode) ============================= */
+.non-strict {
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-digital {
+    align-self: center;
+    font-size: var(--font-size-xx-large);
+    margin-top: 2rem;
+}
+
+.timer-outer {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    align-self: center;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-inner {
+    height: 8.5rem;
+    width: 8.5rem;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pause-btn {
+    background-image: url('../images/pause.png');
+    width: 3rem;
+    height: 3rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.play-symbol {
+    background-image: url('../images/play-button.png');
+    width: 3rem;
+    height: 3rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pause-label {
+    align-self: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-medium);
+}
+
+.end-label {
+    font-weight: var(--font-weight-bold);
+    margin-top: 5px;
+}
+
+.end-container {
+    margin-left: 5px;
+    height: 4rem;
+    margin-top: 2rem;
+}
+
+.end-btn {
+    background-image: url('../images/cancel.png');
+    width: 2rem;
+    height: 2rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+    border-radius: 50%;
+    margin-top: 2px;
 }
