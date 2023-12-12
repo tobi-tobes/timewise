@@ -65,7 +65,7 @@
                 </div>
             </section>
             <!-- Active timer (strict mode) -->
-            <section class="active-timer strict">
+            <section class="active-timer strict hidden">
                 <h3 class="timer-digital">00:55:59</h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
@@ -75,34 +75,48 @@
 
             <!-- MODALS -->
             <!-- Custom time selection modal -->
-            <section class="custom-timer modal hidden">
-                <h3>Create a custom time</h3>
-                <div class="time-picker">
-                    <div class="hour-picker">
-                        <label for="hour">Hour</label>
-                        <select id="hour" class="hour-select"></select>
+            <section class="modal">
+                <div class="custom-timer modal-container">
+                    <h3>Create a custom time</h3>
+                    <div class="time-picker">
+                        <div class="hour-picker">
+                            <label for="hour">Hour</label>
+                            <select id="hour" class="hour-select"></select>
+                        </div>
+                        <div class="minute-picker">
+                            <label for="minute">Minute</label>
+                            <select id="minute" class="minute-select"></select>
+                        </div>
                     </div>
-                    <div class="minute-picker">
-                        <label for="minute">Minute</label>
-                        <select id="minute" class="minute-select"></select>
-                    </div>
+                    <button class="modal-btn">SELECT</button>
                 </div>
-                <button class="modal-btn">SELECT</button>
             </section>
             <!-- Stats modal -->
-            <section class="stats modal hidden">
-                <h3>Time spent wisely:</h3>
-                <div class="stats-counter">
-                    <p>0 mins today</p>
-                    <p>0 mins this week</p>
+            <section class="modal hidden">
+                <div class="stats modal-container">
+                    <h3>Time spent wisely:</h3>
+                    <div class="stats-counter">
+                        <p>0 mins today</p>
+                        <p>0 mins this week</p>
+                    </div>
+                    <button class="modal-btn">DONE</button>
                 </div>
-                <button class="modal-btn">DONE</button>
             </section>
             <!-- Timer done modal -->
-            <section class="timer-done modal hidden">
-                <h3>00:00:00</h3>
-                <p>You did it!</p>
-                <button class="modal-btn">DONE</button>
+            <section class="modal hidden">
+                <div class="timer-done modal-container">
+                    <h3>00:00:00</h3>
+                    <p>You did it!</p>
+                    <button class="modal-btn">DONE</button>
+                </div>
+            </section>
+            <!-- End button clicked modal -->
+            <section class="modal hidden">
+                <div class="end-clicked modal-container">
+                    <h3>Are you sure you want to end your session?</h3>
+                    <button class="no-btn">No</button>
+                    <button class="yes-btn">Yes</button>
+                </div>
             </section>
         </main>
     </body>
