@@ -405,6 +405,17 @@ span {
 }
 
 
+.timer-done .timer-digital {
+    font-size: var(--font-size-x-large);
+    margin-top: 4rem;
+}
+
+.timer-done p {
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-regular);
+}
+
+
 /* Display control ============================= */
 .hidden {
     display: none;
