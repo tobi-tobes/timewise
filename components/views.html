@@ -75,7 +75,7 @@
 
             <!-- MODALS -->
             <!-- Custom time selection modal -->
-            <section class="modal">
+            <section class="modal hidden">
                 <div class="custom-timer modal-container">
                     <h3>Create a custom time</h3>
                     <div class="time-picker">
@@ -92,12 +92,12 @@
                 </div>
             </section>
             <!-- Stats modal -->
-            <section class="modal hidden">
+            <section class="modal">
                 <div class="stats modal-container">
                     <h3>Time spent wisely:</h3>
                     <div class="stats-counter">
-                        <p>0 mins today</p>
-                        <p>0 mins this week</p>
+                        <p class="today-counter"><span>0</span> mins today</p>
+                        <p class="this-week-counter"><span>0</span> mins this week</p>
                     </div>
                     <button class="modal-btn">DONE</button>
                 </div>

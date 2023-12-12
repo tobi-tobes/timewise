@@ -383,6 +383,27 @@ span {
     margin-top: 3rem;
 }
 
+/* Stats modal ============================= */
+.stats-counter {
+    margin-top: 2.7rem;
+}
+
+.stats-counter p {
+    font-size: var(--font-size-small);
+}
+
+.today-counter {
+    margin-bottom: 0;
+}
+
+.this-week-counter {
+    margin-top: 4px;
+}
+
+.stats-counter p span {
+    font-size: var(--font-size-medium);
+}
+
 
 /* Display control ============================= */
 .hidden {
