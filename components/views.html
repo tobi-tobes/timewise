@@ -4,6 +4,8 @@
         <title>TimeWise</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/styles.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="../js/script.js"></script>
     </head>
     <body>
         <header>
@@ -17,12 +19,12 @@
             <section class="homepage">
                 <h3>Choose a timer:</h3>
                 <div class="timers carousel">
-                    <button class="pomodoro preset-timer">Pomodoro</button>
-                    <button class="30-mins preset-timer">30 mins</button>
-                    <button class="1-hr preset-timer">1 hr</button>
-                    <button class="1-hr-30-mins preset-timer">1 hr 30 mins</button>
-                    <button class="2-hrs preset-timer">2 hrs</button>
-                    <button class="2-hrs-30-mins preset-timer">2 hrs 30 mins</button>
+                    <button class="25 25-mins preset-timer">Pomodoro</button>
+                    <button class="30 30-mins preset-timer">30 mins</button>
+                    <button class="60 1-hr preset-timer">1 hr</button>
+                    <button class="90 1-hr-30-mins preset-timer">1 hr 30 mins</button>
+                    <button class="120 2-hrs preset-timer">2 hrs</button>
+                    <button class="150 2-hrs-30-mins preset-timer">2 hrs 30 mins</button>
                 </div>
                 <button class="custom-timer-btn">Create a custom timer</button>
             </section>
@@ -38,18 +40,21 @@
                             <div class="strict-mode-toggle-switch"></div>
                         </label>
                     </div>
-                    <p class="appear-when-strict-mode-toggled">If strict mode is on, you will not be able to exit the timer until it ends.</p>
+                    <p class="appear-when-strict-mode-toggled hidden">If strict mode is on, you will not be able to exit the timer until it ends.</p>
                 </div>
                 <div>
                     <p class="site-blacklist-label">Type in your site blacklist:</p>
                     <p>Type in a comma-separated list of the websites you want to block during your session.</p>
                     <textarea name="site-blacklist" id="site-blacklist" cols="70" rows="6"></textarea>
                 </div>
-                <button class="start-btn">Start your session (1 hr)</button>
+                <div class="timer-config-buttons">
+                    <button class="back-btn">Go back</button>
+                    <button class="start-btn"></button>
+                </div>
             </section>
             <!-- Active timer (non-strict mode) -->
             <section class="active-timer non-strict hidden">
-                <h3 class="timer-digital">00:55:59</h3>
+                <h3 class="timer-digital"></h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
                         <div class="pause-btn running">
@@ -66,7 +71,7 @@
             </section>
             <!-- Active timer (strict mode) -->
             <section class="active-timer strict hidden">
-                <h3 class="timer-digital">00:55:59</h3>
+                <h3 class="timer-digital"></h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
                 </div>
@@ -75,7 +80,7 @@
 
             <!-- MODALS -->
             <!-- Custom time selection modal -->
-            <section class="modal hidden">
+            <section class="modal hidden" id="custom-timer-modal">
                 <div class="custom-timer modal-container">
                     <h3>Create a custom time</h3>
                     <div class="time-picker">
@@ -88,11 +93,14 @@
                             <select id="minute" class="minute-select"></select>
                         </div>
                     </div>
-                    <button class="modal-btn">SELECT</button>
+                    <div class="custom-timer-buttons">
+                        <button class="modal-btn back-btn">BACK</button>
+                        <button class="modal-btn select-btn">SELECT</button>
+                    </div>
                 </div>
             </section>
             <!-- Stats modal -->
-            <section class="modal hidden">
+            <section class="modal hidden" id="stats-modal">
                 <div class="stats modal-container">
                     <h3>Time spent wisely:</h3>
                     <div class="stats-counter">
