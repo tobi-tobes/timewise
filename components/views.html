@@ -54,7 +54,7 @@
             </section>
             <!-- Active timer (non-strict mode) -->
             <section class="active-timer non-strict hidden">
-                <h3 class="timer-digital"></h3>
+                <h3 class="timer-digital" id="non-strict-timer"></h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
                         <div class="pause-btn running">
@@ -71,7 +71,7 @@
             </section>
             <!-- Active timer (strict mode) -->
             <section class="active-timer strict hidden">
-                <h3 class="timer-digital"></h3>
+                <h3 class="timer-digital" id="strict-timer"></h3>
                 <div class="timer-outer">
                     <div class="timer-inner">
                 </div>
@@ -111,7 +111,7 @@
                 </div>
             </section>
             <!-- Timer done modal -->
-            <section class="modal hidden">
+            <section class="modal hidden" id="timer-done-modal">
                 <div class="timer-done modal-container">
                     <h3 class="timer-digital">00:00:00</h3>
                     <p>You did it!</p>

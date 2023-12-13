@@ -89,7 +89,6 @@ $(document).ready(function() {
     homePage.classList.remove('hidden');
   });
 
-  // Show Strict mode tooltip if strict mode is toggled
   const strictModeToolTip = document.querySelector('.appear-when-strict-mode-toggled');
   strictModeCheckbox.addEventListener('change', () => {
     // Check the state of the strict mode checkbox
@@ -98,16 +97,27 @@ $(document).ready(function() {
     // Show tooltip depending on whether strict mode has been toggled on or off
     if (isStrictMode) {
       strictModeToolTip.classList.remove('hidden');
+      timerDigital = document.getElementById('strict-timer');
     } else {
       strictModeToolTip.classList.add('hidden');
+      timerDigital = document.getElementById('non-strict-timer');
     }
   });
 
-   // Countdown timer functionality
-   const timerDigital = document.querySelector('.timer-digital');
-   let timeRemaining;
+  // Countdown timer functionality
+  // Retrieve digital timer based on if strict mode is toggled
+  let timerDigital;
+  const isStrictMode = strictModeCheckbox.checked;
 
-   function startCountdownTimer(durationInSeconds) {
+  if (isStrictMode) {
+    timerDigital = document.getElementById('strict-timer');
+  } else {
+    timerDigital = document.getElementById('non-strict-timer');
+  }
+  
+  let timeRemaining;
+
+  function startCountdownTimer(durationInSeconds) {
     timeRemaining = durationInSeconds;
 
     // Update the timer display initially
@@ -146,13 +156,10 @@ $(document).ready(function() {
     return timeComponent < 10 ? `0${timeComponent}` : timeComponent;
   }
 
-  // Function to perform actions when the timer reaches zero
+  // Function to reveal timer done
   function timerReachedZeroActions() {
-    // Add your actions here (e.g., show a modal, play a sound, etc.)
-    console.log('Timer reached zero!');
-
-    // For demonstration purposes, showing a modal after the timer reaches zero
-    alert('Timer reached zero!');
+    const timerDoneModal = document.getElementById('timer-done-modal');
+    timerDoneModal.classList.remove('hidden');
   }
 
   // Start timer when 'Start session' button is clicked
