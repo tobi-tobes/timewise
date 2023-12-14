@@ -121,6 +121,54 @@ $(document).ready(function() {
     updateSiteBlacklist();
   });
 
+  // NON-STRICT ACTIVE TIMER FUNCTIONALITY
+  const pauseBtn = document.querySelector('.pause-symbol');
+  const playBtn = document.querySelector('.play-symbol');
+  const endBtn = document.querySelector('.end-btn');
+  const endTimerModal = document.getElementById('end-clicked-modal');
+  let isPaused = false;
+  let countdownInterval;
+
+  // Pause button functionality
+  pauseBtn.addEventListener('click', () => {
+    isPaused = true;
+    pauseBtn.classList.add('hidden');
+    playBtn.classList.remove('hidden');
+    clearInterval(countdownInterval);
+  });
+
+  // Play button functionality
+  playBtn.addEventListener('click', () => {
+    isPaused = false;
+    pauseBtn.classList.remove('hidden');
+    playBtn.classList.add('hidden');
+    startCountdownTimer(timeRemaining);
+  });
+
+  // End button functionality
+  endBtn.addEventListener('click', () => {
+    isPaused = true;
+    clearInterval(countdownInterval);
+    endTimerModal.classList.remove('hidden');
+  });
+
+  // End timer modal functionality
+  const yesBtn = document.querySelector('.yes-btn');
+  const noBtn = document.querySelector('.no-btn');
+
+  yesBtn.addEventListener('click', () => {
+    clearInterval(countdownInterval);
+    endTimerModal.classList.add('hidden');
+    activeTimerNonStrict.classList.add('hidden');
+    homePage.classList.remove('hidden');
+  });
+
+  noBtn.addEventListener('click', () => {
+    isPaused = false;
+    endTimerModal.classList.add('hidden');
+    startCountdownTimer(timeRemaining);
+  });
+
   // Countdown timer functionality
   // Retrieve digital timer based on if strict mode is toggled
   let timerDigital;
@@ -133,6 +181,7 @@ $(document).ready(function() {
   }
   
   let timeRemaining;
+  const timerDoneModal = document.getElementById('timer-done-modal');
 
   function startCountdownTimer(durationInSeconds) {
     timeRemaining = durationInSeconds;
@@ -141,20 +190,21 @@ $(document).ready(function() {
     updateTimerDisplay();
 
     // Start the countdown interval
-    const countdownInterval = setInterval(() => {
-      timeRemaining--;
+    countdownInterval = setInterval(() => {
+      if (!isPaused) {
+        timeRemaining--;
 
-      // Update the timer display
-      updateTimerDisplay();
+        // Update the timer display
+        updateTimerDisplay();
 
-      // Check if the countdown has reached zero
-      if (timeRemaining <= 0) {
-        // Stop the countdown interval
-        clearInterval(countdownInterval);
+        // Check if the countdown has reached zero
+        if (timeRemaining <= 0) {
+          // Stop the countdown interval
+          clearInterval(countdownInterval);
 
-        // Show timer done modal when timer is done running
-        const timerDoneModal = document.getElementById('timer-done-modal');
-        timerDoneModal.classList.remove('hidden');
+          // Show timer done modal when timer is done running
+          timerDoneModal.classList.remove('hidden');
+        }
       }
     }, 1000);
   }
@@ -192,17 +242,12 @@ $(document).ready(function() {
     startCountdownTimer(selectedTime);
   });
 
-  // NON-STRICT ACTIVE TIMER FUNCTIONALITY
-  const pauseBtn = document.querySelector('.pause-symbol');
-  const playBtn = document.querySelector('.play-symbol');
 
-  pauseBtn.addEventListener('click', () => {
-    pauseBtn.classList.add('hidden');
-    playBtn.classList.remove('hidden');
-  });
-
-  playBtn.addEventListener('click', () => {
-    pauseBtn.classList.remove('hidden');
-    playBtn.classList.add('hidden');
+  // TIMER DONE MODAL FUNCTIONALITY
+  const timerDoneEndBtn = document.querySelector('#timer-done-modal .modal-btn');
+  timerDoneEndBtn.addEventListener('click', () => {
+    timerDoneModal.classList.add('hidden');
+    activeTimerNonStrict.classList.add('hidden');
+    homePage.classList.remove('hidden');
   });
 });
