@@ -104,6 +104,23 @@ $(document).ready(function() {
     }
   });
 
+  // Site black-list functionality
+  const siteBlacklistTextarea = document.getElementById('site-blacklist');
+  let blockedSites = [];
+
+  function updateSiteBlacklist() {
+    // Parse the site blacklist textarea input into blockedSites array
+    blockedSites = siteBlacklistTextarea.value.split(',').map(site => site.trim());
+
+    // Save the updated blockedSites array to chrome.storage
+    chrome.storage.sync.set({ 'blockedSites': blockedSites });
+  }
+
+  siteBlacklistTextarea.addEventListener('input', () => {
+    // Update the site blacklist array
+    updateSiteBlacklist();
+  });
+
   // Countdown timer functionality
   // Retrieve digital timer based on if strict mode is toggled
   let timerDigital;
@@ -135,8 +152,9 @@ $(document).ready(function() {
         // Stop the countdown interval
         clearInterval(countdownInterval);
 
-        // Perform actions when the timer reaches zero (e.g., show a modal)
-        timerReachedZeroActions();
+        // Show timer done modal when timer is done running
+        const timerDoneModal = document.getElementById('timer-done-modal');
+        timerDoneModal.classList.remove('hidden');
       }
     }, 1000);
   }
@@ -147,19 +165,13 @@ $(document).ready(function() {
     const minutes = Math.floor((timeRemaining % 3600) / 60);
     const seconds = timeRemaining % 60;
 
-    // Display the time in the desired format (adjust as needed)
+    // Display the time in hours, minutes, and seconds
     timerDigital.textContent = `${formatTimeComponent(hours)}:${formatTimeComponent(minutes)}:${formatTimeComponent(seconds)}`;
   }
 
-  // Function to format time component (e.g., add leading zero)
+  // Function to format time component
   function formatTimeComponent(timeComponent) {
     return timeComponent < 10 ? `0${timeComponent}` : timeComponent;
-  }
-
-  // Function to reveal timer done
-  function timerReachedZeroActions() {
-    const timerDoneModal = document.getElementById('timer-done-modal');
-    timerDoneModal.classList.remove('hidden');
   }
 
   // Start timer when 'Start session' button is clicked
@@ -177,22 +189,6 @@ $(document).ready(function() {
 
     const durationInSeconds = selectedTime * 60;
 
-    startCountdownTimer(durationInSeconds);
-  });
-
-  // Site black-list functionality
-  const siteBlacklistTextarea = document.getElementById('site-blacklist');
-
-  function updateSiteBlacklist() {
-    // Parse the site blacklist textarea input into an array
-    const siteBlacklist = siteBlacklistTextarea.value.split(',').map(site => site.trim());
-
-    // Use the 'siteBlacklist' array as needed, for example:
-    console.log('Site Blacklist:', siteBlacklist);
-  }
-
-  siteBlacklistTextarea.addEventListener('input', () => {
-    // Update the site blacklist array
-    updateSiteBlacklist();
+    startCountdownTimer(selectedTime);
   });
 });
