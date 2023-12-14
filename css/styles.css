@@ -305,7 +305,7 @@ span {
     justify-content: center;
 }
 
-.pause-btn {
+.pause-symbol {
     background-image: url('../images/pause.png');
     width: 3rem;
     height: 3rem;

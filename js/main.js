@@ -191,4 +191,18 @@ $(document).ready(function() {
 
     startCountdownTimer(selectedTime);
   });
+
+  // NON-STRICT ACTIVE TIMER FUNCTIONALITY
+  const pauseBtn = document.querySelector('.pause-symbol');
+  const playBtn = document.querySelector('.play-symbol');
+
+  pauseBtn.addEventListener('click', () => {
+    pauseBtn.classList.add('hidden');
+    playBtn.classList.remove('hidden');
+  });
+
+  playBtn.addEventListener('click', () => {
+    pauseBtn.classList.remove('hidden');
+    playBtn.classList.add('hidden');
+  });
 });
