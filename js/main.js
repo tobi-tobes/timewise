@@ -26,11 +26,17 @@ $(document).ready(function() {
   const customTimerBtn = document.querySelector('.custom-timer-btn');
   const customTimerModal = document.getElementById('custom-timer-modal');
   const timerConfigStartBtn = document.querySelector('.timer-config-buttons .start-btn');
+  const strictModeCheckbox = document.getElementById('strict-mode-toggle-cb');
+  const strictModeToolTip = document.querySelector('.appear-when-strict-mode-toggled');
   let selectedTime;
 
   presetTimers.forEach((presetTimer) => {
     // Reveal the timer configuration page when any of the pre-set timers are clicked
     presetTimer.addEventListener('click', () => {
+      // Make sure strict mode is unchecked at the start of each configuration
+      strictModeCheckbox.checked = false;
+      strictModeToolTip.classList.add('hidden');
+
       // Store timer duration in variable for future use
       const time = presetTimer.classList[0];
       const duration = presetTimer.classList[1].replaceAll('-', ' ');
@@ -78,7 +84,6 @@ $(document).ready(function() {
   const timerConfigBackBtn = document.querySelector('.timer-config-buttons .back-btn');
   const activeTimerStrict = document.querySelector('.active-timer.strict');
   const activeTimerNonStrict = document.querySelector('.active-timer.non-strict');
-  const strictModeCheckbox = document.getElementById('strict-mode-toggle-cb');
 
   // Return to home page when BACK button is clicked
   timerConfigBackBtn.addEventListener('click', () => {
@@ -89,7 +94,6 @@ $(document).ready(function() {
     homePage.classList.remove('hidden');
   });
 
-  const strictModeToolTip = document.querySelector('.appear-when-strict-mode-toggled');
   strictModeCheckbox.addEventListener('change', () => {
     // Check the state of the strict mode checkbox
     const isStrictMode = strictModeCheckbox.checked;
@@ -183,6 +187,7 @@ $(document).ready(function() {
   let timeRemaining;
   const timerDoneModal = document.getElementById('timer-done-modal');
 
+  // Function controlling countdown timer
   function startCountdownTimer(durationInSeconds) {
     timeRemaining = durationInSeconds;
 
@@ -227,6 +232,7 @@ $(document).ready(function() {
   // Start timer when 'Start session' button is clicked
   timerConfigStartBtn.addEventListener('click', () => {
     timerConfigPage.classList.add('hidden');
+    isPaused = false;
 
     // Check if 'Strict mode' is toggled on
     const isStrictMode = strictModeCheckbox.checked;
@@ -248,6 +254,18 @@ $(document).ready(function() {
   timerDoneEndBtn.addEventListener('click', () => {
     timerDoneModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
+    activeTimerStrict.classList.add('hidden');
     homePage.classList.remove('hidden');
+  });
+
+
+  // STRICT ACTIVE TIMER FUNCTIONALITY
+  const strictTimerPause = document.querySelector('.active-timer.strict .timer-outer .timer-inner');
+  const wordsOfAffirmationArray = ['You can do it!', "Don't give up!", "Don't stop now!", "Believe in yourself!", "Every small step counts!", "You're not a quitter!"];
+  const wordsOfAffirmation = document.querySelector('.words-of-affirmation');
+
+  strictTimerPause.addEventListener('click', () => {
+    const randomIdx = Math.floor(Math.random() * wordsOfAffirmationArray.length);
+    wordsOfAffirmation.textContent = wordsOfAffirmationArray[randomIdx];
   });
 });
