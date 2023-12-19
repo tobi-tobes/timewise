@@ -5,6 +5,12 @@ $(document).ready(function() {
   const statsBtn = document.querySelector('.stats-btn');
   const statsModal = document.getElementById('stats-modal');
 
+  // Retrieve the total time to be displayed from storage
+  const totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
+
+  // Display the total time in the stats modal
+  document.querySelector('.today-counter span').textContent = totalMinutes;
+
   statsBtn.addEventListener('click', () => {
     // Reveal stats modal when 'STATS' button on the header is clicked
     statsModal.classList.toggle('hidden');
@@ -15,6 +21,18 @@ $(document).ready(function() {
     // Close stats modal when the 'DONE' button is clicked
     statsModal.classList.add('hidden');
   })
+
+  // Function to keep track of total time spent on extension for stats modal
+  function updateTotalTimeSpent(minutes) {
+    // Retrieve the existing total time from storage
+    let totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
+  
+    // Update the total time
+    totalMinutes = parseInt(totalMinutes) + minutes;
+  
+    // Save the updated total time back to storage
+    localStorage.setItem('totalTimeSpent', totalMinutes);
+  }
 
 
   // HOME PAGE FUNCTIONALITY
@@ -74,7 +92,7 @@ $(document).ready(function() {
   });
 
   customTimerBackBtn.addEventListener('click', () => {
-    // Close stats modal when the 'DONE' button is clicked
+    // Close custom timer modal when the 'DONE' button is clicked
     customTimerModal.classList.add('hidden');
   });
 
@@ -164,6 +182,7 @@ $(document).ready(function() {
     clearInterval(countdownInterval);
     endTimerModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
+    updateTotalTimeSpent(durationInSeconds - timeRemaining);
     homePage.classList.remove('hidden');
   });
 
@@ -174,7 +193,7 @@ $(document).ready(function() {
   });
 
   // Countdown timer functionality
-  // Retrieve digital timer based on if strict mode is toggled
+  // Retrieve digital timer div from HTML based on if strict mode is toggled
   let timerDigital;
   const isStrictMode = strictModeCheckbox.checked;
 
@@ -256,6 +275,7 @@ $(document).ready(function() {
     activeTimerNonStrict.classList.add('hidden');
     activeTimerStrict.classList.add('hidden');
     homePage.classList.remove('hidden');
+    updateTotalTimeSpent(selectedTime);
   });
 
 
