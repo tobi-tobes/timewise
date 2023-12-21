@@ -1,5 +1,20 @@
 // background.js
 
+// Manage timer state
+let timerState = {
+  isPaused: false,
+  remainingTime: 0,
+};
+
+// Listen for messages from main.js concerning state
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'getTimerState') {
+    sendResponse(timerState);
+  } else if (request.action === 'updateTimerState') {
+    timerState = request.timerState;
+  }
+});
+
 // Check the manifest version
 if (chrome.runtime.getManifest().manifest_version === 3) {
     // For manifest version 3 and above
