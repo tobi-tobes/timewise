@@ -19,13 +19,16 @@
     "128": "images/logo.png"
   },
   "background": {
-    "service_worker": "js/background.js",
-    "persistent": false
+    "service_worker": "js/background.js"
   },
-  "permissions": ["activeTab", "scripting", "declarativeNetRequest", "declarativeNetRequestFeedback"],
-  "web_accessible_resources": [
-    "css/*",
-    "js/*",
-    "images/*"
-  ]
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "storage"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
 }

@@ -124,7 +124,7 @@ $(document).ready(function() {
     blockedSites = siteBlacklistTextarea.value.split(',').map(site => site.trim());
 
     // Save the updated blockedSites array to chrome.storage
-    chrome.storage.sync.set({ 'blockedSites': blockedSites });
+    chrome.storage.local.set({ 'blockedSites': blockedSites });
   }
 
   siteBlacklistTextarea.addEventListener('input', () => {
