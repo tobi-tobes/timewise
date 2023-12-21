@@ -138,6 +138,7 @@ $(document).ready(function() {
   const endBtn = document.querySelector('.end-btn');
   const endTimerModal = document.getElementById('end-clicked-modal');
   let timeRemaining;
+  let durationInSeconds;
   let isPaused = false;
   let countdownInterval;
 
@@ -172,7 +173,7 @@ $(document).ready(function() {
     clearInterval(countdownInterval);
     endTimerModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
-    updateTotalTimeSpent(selectedTime - timeRemaining);
+    updateTotalTimeSpent(Math.ceil((durationInSeconds - timeRemaining) / 60));
     homePage.classList.remove('hidden');
   });
 
@@ -251,9 +252,9 @@ $(document).ready(function() {
       activeTimerNonStrict.classList.remove('hidden');
     }
 
-    const durationInSeconds = selectedTime * 60;
+    durationInSeconds = selectedTime * 60;
 
-    startCountdownTimer(selectedTime);
+    startCountdownTimer(durationInSeconds);
   });
 
 

@@ -1,0 +1,31 @@
+{
+  "name": "TimeWise",
+  "version": "1.0.0",
+  "description": "A focus timer and productivity aid",
+  "manifest_version": 3,
+  "author": "Oluwatobi Tijani",
+  "action": {
+    "default_popup": "components/views.html",
+    "default_title": "TimeWise",
+    "default_icon": {
+      "16": "images/logo.png",
+      "48": "images/logo.png",
+      "128": "images/logo.png"
+    }
+  },
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "background": {
+    "service_worker": "js/background.js",
+    "persistent": false
+  },
+  "permissions": ["activeTab", "scripting", "declarativeNetRequest", "declarativeNetRequestFeedback"],
+  "web_accessible_resources": [
+    "css/*",
+    "js/*",
+    "images/*"
+  ]
+}
