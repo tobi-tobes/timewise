@@ -407,7 +407,11 @@ span {
 .time-picker {
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-top: 3rem;
+    width: 10rem;
+    height: 5rem;
+    justify-content: space-between;
 }
 
 .custom-timer-buttons {
@@ -417,6 +421,21 @@ span {
     justify-content: space-between;
     margin-bottom: 1rem;
     margin-top: auto;
+}
+
+.hour-picker, .minute-picker {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 4rem;
+    justify-content: space-between;
+}
+
+.hour-picker .hour-select, .minute-picker .minute-select {
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    font-size: var(--font-size-medium);
+    text-align: center;
 }
 
 /* Stats modal ============================= */

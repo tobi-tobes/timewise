@@ -80,17 +80,6 @@ $(document).ready(function() {
   const customTimerSelectBtn = document.querySelector('.custom-timer-buttons .select-btn');
   const customTimerBackBtn = document.querySelector('.custom-timer-buttons .back-btn');
 
-  customTimerSelectBtn.addEventListener('click', () => {
-    // Close custom timer modal when the 'BACK' button is clicked
-    customTimerModal.classList.add('hidden');
-
-    // Hide the home page
-    homePage.classList.add('hidden');
-
-    // Reveal the timer configuration page
-    timerConfigPage.classList.remove('hidden');
-  });
-
   customTimerBackBtn.addEventListener('click', () => {
     // Close custom timer modal when the 'DONE' button is clicked
     customTimerModal.classList.add('hidden');
@@ -148,6 +137,7 @@ $(document).ready(function() {
   const playBtn = document.querySelector('.play-symbol');
   const endBtn = document.querySelector('.end-btn');
   const endTimerModal = document.getElementById('end-clicked-modal');
+  let timeRemaining;
   let isPaused = false;
   let countdownInterval;
 
@@ -182,7 +172,7 @@ $(document).ready(function() {
     clearInterval(countdownInterval);
     endTimerModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
-    updateTotalTimeSpent(durationInSeconds - timeRemaining);
+    updateTotalTimeSpent(selectedTime - timeRemaining);
     homePage.classList.remove('hidden');
   });
 
@@ -202,8 +192,7 @@ $(document).ready(function() {
   } else {
     timerDigital = document.getElementById('non-strict-timer');
   }
-  
-  let timeRemaining;
+
   const timerDoneModal = document.getElementById('timer-done-modal');
 
   // Function controlling countdown timer
@@ -287,5 +276,48 @@ $(document).ready(function() {
   strictTimerPause.addEventListener('click', () => {
     const randomIdx = Math.floor(Math.random() * wordsOfAffirmationArray.length);
     wordsOfAffirmation.textContent = wordsOfAffirmationArray[randomIdx];
+  });
+
+  // CUSTOM TIMER MODAL FUNCTIONALITY
+  const minutePicker = document.querySelector('.minute-select');
+  const hourPicker = document.querySelector('.hour-select');
+
+  // Create options for minute select
+  for(let i = 0; i < 60; i++) {
+    const minuteOptionValue = i < 10 ? `0${i}` : `${i}`;
+    const minuteOption = `<option value="${i}">${minuteOptionValue}</option>`;
+    minutePicker.innerHTML += minuteOption;
+  }
+
+  // Create options for hour select
+  for(let i = 0; i < 100; i++) {
+    const hourOptionValue = i < 10 ? `0${i}` : `${i}`;
+    const hourOption = `<option value="${i * 60}">${hourOptionValue}</option>`;
+    hourPicker.innerHTML += hourOption;
+  }
+
+   // Function to update selectedTime based on user selection
+   function updateSelectedTime() {
+    const selectedHour = parseInt(hourPicker.value, 10) || 0; // Convert to integer, default to 0 if not a valid number
+    const selectedMinute = parseInt(minutePicker.value, 10) || 0; // Convert to integer, default to 0 if not a valid number
+    selectedTime = selectedHour + selectedMinute;
+  }
+
+  // Event listener for minute select
+  minutePicker.addEventListener('change', updateSelectedTime);
+
+  // Event listener for hour select
+  hourPicker.addEventListener('change', updateSelectedTime);
+
+  customTimerSelectBtn.addEventListener('click', () => {
+    // Close custom timer modal when the 'BACK' button is clicked
+    customTimerModal.classList.add('hidden');
+
+    // Hide the home page
+    homePage.classList.add('hidden');
+
+    // Reveal the timer configuration page
+    timerConfigPage.classList.remove('hidden');
+    timerConfigStartBtn.textContent = `Start your session (${selectedTime} mins)`;
   });
 });
