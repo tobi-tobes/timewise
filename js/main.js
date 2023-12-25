@@ -5,7 +5,7 @@ $(document).ready(function() {
   const statsBtn = document.querySelector('.stats-btn');
   const statsModal = document.getElementById('stats-modal');
 
-  // Retrieve the total time to be displayed from storage
+  /* // Retrieve the total time to be displayed from storage
   const totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
 
   // Display the total time in the stats modal
@@ -32,7 +32,7 @@ $(document).ready(function() {
   
     // Save the updated total time back to storage
     localStorage.setItem('totalTimeSpent', totalMinutes);
-  }
+  } */
 
 
   // HOME PAGE FUNCTIONALITY
@@ -85,7 +85,6 @@ $(document).ready(function() {
     customTimerModal.classList.add('hidden');
   });
 
-
   // TIMER CONFIGURATION PAGE FUNCTIONALITY
 
   const timerConfigBackBtn = document.querySelector('.timer-config-buttons .back-btn');
@@ -137,31 +136,25 @@ $(document).ready(function() {
   const playBtn = document.querySelector('.play-symbol');
   const endBtn = document.querySelector('.end-btn');
   const endTimerModal = document.getElementById('end-clicked-modal');
-  let timeRemaining;
   let durationInSeconds;
-  let isPaused = false;
-  let countdownInterval;
 
   // Pause button functionality
   pauseBtn.addEventListener('click', () => {
-    isPaused = true;
     pauseBtn.classList.add('hidden');
     playBtn.classList.remove('hidden');
-    clearInterval(countdownInterval);
+    chrome.runtime.sendMessage({ action: 'pauseTimer', timerState: { isRunning: true, isPaused: true } });
   });
 
   // Play button functionality
   playBtn.addEventListener('click', () => {
-    isPaused = false;
     pauseBtn.classList.remove('hidden');
     playBtn.classList.add('hidden');
-    startCountdownTimer(timeRemaining);
+    chrome.runtime.sendMessage({ action: 'resumeTimer', timerState: { isRunning: true, isPaused: false } });
   });
 
   // End button functionality
   endBtn.addEventListener('click', () => {
-    isPaused = true;
-    clearInterval(countdownInterval);
+    chrome.runtime.sendMessage({ action: 'pauseTimer', timerState: { isRunning: true, isPaused: true } });
     endTimerModal.classList.remove('hidden');
   });
 
@@ -170,17 +163,16 @@ $(document).ready(function() {
   const noBtn = document.querySelector('.no-btn');
 
   yesBtn.addEventListener('click', () => {
-    clearInterval(countdownInterval);
     endTimerModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
-    updateTotalTimeSpent(Math.ceil((durationInSeconds - timeRemaining) / 60));
+    // updateTotalTimeSpent(Math.ceil((durationInSeconds - timeRemaining) / 60));
+    chrome.runtime.sendMessage({ action: 'endTimer', timerState: { isRunning: false, isPaused: false } });
     homePage.classList.remove('hidden');
   });
 
   noBtn.addEventListener('click', () => {
-    isPaused = false;
     endTimerModal.classList.add('hidden');
-    startCountdownTimer(timeRemaining);
+    chrome.runtime.sendMessage({ action: 'resumeTimer', timerState: { isRunning: true, isPaused: false } });
   });
 
   // Countdown timer functionality
@@ -196,52 +188,30 @@ $(document).ready(function() {
 
   const timerDoneModal = document.getElementById('timer-done-modal');
 
-  // Function controlling countdown timer
-  function startCountdownTimer(durationInSeconds) {
-    timeRemaining = durationInSeconds;
-
-    // Update the timer display initially
-    updateTimerDisplay();
-
-    // Start the countdown interval
-    countdownInterval = setInterval(() => {
-      if (!isPaused) {
-        timeRemaining--;
-
-        // Update the timer display
-        updateTimerDisplay();
-
-        // Check if the countdown has reached zero
-        if (timeRemaining <= 0) {
-          // Stop the countdown interval
-          clearInterval(countdownInterval);
-
-          // Show timer done modal when timer is done running
-          timerDoneModal.classList.remove('hidden');
-        }
-      }
-    }, 1000);
-  }
-
-  // Function to update the timer display
-  function updateTimerDisplay() {
-    const hours = Math.floor(timeRemaining / 3600);
-    const minutes = Math.floor((timeRemaining % 3600) / 60);
-    const seconds = timeRemaining % 60;
-
-    // Display the time in hours, minutes, and seconds
-    timerDigital.textContent = `${formatTimeComponent(hours)}:${formatTimeComponent(minutes)}:${formatTimeComponent(seconds)}`;
-  }
-
   // Function to format time component
   function formatTimeComponent(timeComponent) {
     return timeComponent < 10 ? `0${timeComponent}` : timeComponent;
   }
 
+  function updateTimerUI(hours, minutes, seconds) {
+    // Display the time in hours, minutes, and seconds
+    timerDigital.textContent = `${formatTimeComponent(hours)}:${formatTimeComponent(minutes)}:${formatTimeComponent(seconds)}`;
+  }
+
+  // Listener for messages from background.js to update timer UI or show timerDoneModal
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'updateTimerUI') {
+      // Update the UI based on the received timer state
+      updateTimerUI(request.currentTime.hours, request.currentTime.minutes, request.currentTime.seconds);
+    } else if (request.action === 'timerDone') {
+      // Show timer done modal when timer is done running
+      timerDoneModal.classList.remove('hidden');
+    }
+  });
+
   // Start timer when 'Start session' button is clicked
   timerConfigStartBtn.addEventListener('click', () => {
     timerConfigPage.classList.add('hidden');
-    isPaused = false;
 
     // Check if 'Strict mode' is toggled on
     const isStrictMode = strictModeCheckbox.checked;
@@ -254,7 +224,7 @@ $(document).ready(function() {
 
     durationInSeconds = selectedTime * 60;
 
-    startCountdownTimer(durationInSeconds);
+    chrome.runtime.sendMessage({ action: 'startTimer', timerState: { isRunning: true, isPaused: false, timeRemaining: durationInSeconds } });
   });
 
 
@@ -265,7 +235,6 @@ $(document).ready(function() {
     activeTimerNonStrict.classList.add('hidden');
     activeTimerStrict.classList.add('hidden');
     homePage.classList.remove('hidden');
-    updateTotalTimeSpent(selectedTime);
   });
 
 
