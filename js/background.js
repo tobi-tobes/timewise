@@ -1,5 +1,10 @@
 // background.js
 
+// Open extension in its own tab for better persistence
+chrome.action.onClicked.addListener(async () => {
+  await chrome.tabs.create({ url: chrome.runtime.getURL("components/views.html") });
+});
+
 // COUNTDOWN TIMER FUNCTIONALITY
 // Initialize timer state
 const timerState = {
