@@ -44,6 +44,10 @@ function startCountdownTimer(durationInSeconds) {
       if (timerState.timeRemaining <= 0) {
         // Stop the countdown interval
         clearInterval(countdownInterval);
+        chrome.storage.local.get('blockedSites', function (result) {
+          const blockedSites = result.blockedSites || [];
+          unSetDeclarativeNetRequestRules(blockedSites);
+        });
         chrome.runtime.sendMessage({ action: 'timerDone' });
       }
     }
@@ -71,26 +75,50 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       break;
     case 'endTimer':
       clearInterval(countdownInterval);
+      chrome.storage.local.get('blockedSites', function (result) {
+        const blockedSites = result.blockedSites || [];
+        unSetDeclarativeNetRequestRules(blockedSites);
+      });
       break;
     default:
       break;
   }
 });
   
-// Function to set up rules for declarativeNetRequest
+// Function to set up blocking rules for declarativeNetRequest
 function setDeclarativeNetRequestRules(blockedSites) {
   // Set up rules for declarativeNetRequest
-  const rules = blockedSites.map(site => ({
-    id: site,
-    priority: 1,
-    action: {
-      type: 'block'
-    },
-    condition: {
-      regexFilter: `.*${site}.*`
-    }
-  }));
+  blockedSites.forEach((domain, index) => {
+    let id = index + 1;
+  
+    chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: [{
+        "id": id,
+        "priority": 1,
+        "action": { "type": "block" },
+        "condition": { "urlFilter": domain, "resourceTypes": ["main_frame"] }
+      }],
+      removeRuleIds: [id]
+    });
+  });
 
-  // Add rules to declarativeNetRequest
-  chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [], addRules: rules });
+  console.log("Blocked Sites:", blockedSites);
+}
+
+// Function to remove blocking rules for declarativeNetRequest
+function unSetDeclarativeNetRequestRules(blockedSites) {
+  // Set up rules for declarativeNetRequest
+  blockedSites.forEach((domain, index) => {
+    let id = index + 1;
+  
+    chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: [{
+        "id": id,
+        "priority": 1,
+        "action": { "type": "allow" },
+        "condition": { "urlFilter": domain, "resourceTypes": ["main_frame"] }
+      }],
+      removeRuleIds: [id]
+    });
+  });
 }
