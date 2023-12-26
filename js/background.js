@@ -101,8 +101,6 @@ function setDeclarativeNetRequestRules(blockedSites) {
       removeRuleIds: [id]
     });
   });
-
-  console.log("Blocked Sites:", blockedSites);
 }
 
 // Function to remove blocking rules for declarativeNetRequest

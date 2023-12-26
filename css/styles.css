@@ -431,7 +431,7 @@ span {
 
 .hour-picker .hour-select, .minute-picker .minute-select {
     height: 2rem;
-    width: 2rem;
+    width: 4rem;
     border: none;
     font-size: var(--font-size-medium);
     text-align: center;
