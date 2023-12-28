@@ -5,6 +5,18 @@ chrome.action.onClicked.addListener(async () => {
   await chrome.tabs.create({ url: chrome.runtime.getURL("components/main.html") });
 });
 
+// Function to keep track of total time spent on extension
+function updateTotalTimeSpent(minutes) {
+  // Retrieve the existing total time from storage
+  let totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
+
+  // Update the total time
+  totalMinutes = parseInt(totalMinutes) + minutes;
+
+  // Save the updated total time back to storage
+  localStorage.setItem('totalTimeSpent', totalMinutes);
+}
+
 // COUNTDOWN TIMER FUNCTIONALITY
 // Initialize timer state
 const timerState = {
@@ -54,6 +66,21 @@ function startCountdownTimer(durationInSeconds) {
   }, 1000);
 }
 
+// Variable to keep track of break time taken
+let breakStartTime;
+
+// Function to keep track of total break time taken on extension
+function updateTotalBreakTime(minutes) {
+  // Retrieve the existing total break time from storage
+  let totalMinutes = localStorage.getItem('totalBreakTime') || 0;
+
+  // Update the total break time
+  totalMinutes = parseInt(totalMinutes) + minutes;
+
+  // Save the updated total break time back to storage
+  localStorage.setItem('totalBreakTime', totalMinutes);
+}
+
 // Listen for messages from pop-up script to start, pause, play, or end timer
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   timerState.isRunning = request.timerState.isRunning;
@@ -68,9 +95,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       startCountdownTimer(request.timerState.timeRemaining);
       break;
     case 'pauseTimer':
+      breakStartTime = Date.now();
+      chrome.storage.local.get('blockedSites', function (result) {
+        const blockedSites = result.blockedSites || [];
+        unSetDeclarativeNetRequestRules(blockedSites);
+      });
       clearInterval(countdownInterval);
       break;
     case 'resumeTimer':
+      updateTotalBreakTime(Date.now() - breakStartTime);
+      breakStartTime = 0;
+      chrome.storage.local.get('blockedSites', function (result) {
+        const blockedSites = result.blockedSites || [];
+        setDeclarativeNetRequestRules(blockedSites);
+      });
       startCountdownTimer(timerState.timeRemaining);
       break;
     case 'endTimer':
@@ -79,6 +117,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const blockedSites = result.blockedSites || [];
         unSetDeclarativeNetRequestRules(blockedSites);
       });
+      updateTotalTimeSpent(Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
       break;
     default:
       break;

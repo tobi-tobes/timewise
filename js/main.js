@@ -1,28 +1,10 @@
+// main.js
+// Main script file for the functionality of the extension
+
 $(document).ready(function() {
-  // HEADER FUNCTIONALITY
+  // HELPER FUNCTIONS AND VARIABLES FOR DATA COLLECTION FOR STATS
 
-  // Stats button and modal
-  const statsBtn = document.querySelector('.stats-btn');
-  const statsModal = document.getElementById('stats-modal');
-
-  /* // Retrieve the total time to be displayed from storage
-  const totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
-
-  // Display the total time in the stats modal
-  document.querySelector('.today-counter span').textContent = totalMinutes;
-
-  statsBtn.addEventListener('click', () => {
-    // Reveal stats modal when 'STATS' button on the header is clicked
-    statsModal.classList.toggle('hidden');
-  });
-
-  const statsDoneBtn = document.querySelector('#stats-modal .modal-btn');
-  statsDoneBtn.addEventListener('click', () => {
-    // Close stats modal when the 'DONE' button is clicked
-    statsModal.classList.add('hidden');
-  })
-
-  // Function to keep track of total time spent on extension for stats modal
+  // Function to keep track of total time spent on extension
   function updateTotalTimeSpent(minutes) {
     // Retrieve the existing total time from storage
     let totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
@@ -32,7 +14,19 @@ $(document).ready(function() {
   
     // Save the updated total time back to storage
     localStorage.setItem('totalTimeSpent', totalMinutes);
-  } */
+  }
+
+  // Function to keep track of total number of sessions
+  function updateTotalSessions() {
+    // Retrieve the existing total number of sessions from storage
+    let totalSessions = localStorage.getItem('totalSessions') || 0;
+  
+    // Update the total number of sessions
+    totalSessions = parseInt(totalSessions) + 1;
+  
+    // Save the updated total time back to storage
+    localStorage.setItem('totalSessions', totalSessions);
+  }
 
 
   // HOME PAGE FUNCTIONALITY
@@ -165,7 +159,6 @@ $(document).ready(function() {
   yesBtn.addEventListener('click', () => {
     endTimerModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
-    // updateTotalTimeSpent(Math.ceil((durationInSeconds - timeRemaining) / 60));
     chrome.runtime.sendMessage({ action: 'endTimer', timerState: { isRunning: false, isPaused: false } });
     homePage.classList.remove('hidden');
   });
@@ -206,6 +199,10 @@ $(document).ready(function() {
     } else if (request.action === 'timerDone') {
       // Show timer done modal when timer is done running
       timerDoneModal.classList.remove('hidden');
+      // Save finished time to storage
+      updateTotalTimeSpent(Math.ceil((durationInSeconds) / 60));
+      // Update number of sessions
+      updateTotalSessions();
     }
   });
 
