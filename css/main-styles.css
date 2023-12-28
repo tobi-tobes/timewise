@@ -32,8 +32,6 @@ html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:b
 
     --font-weight-regular: 400;
     --font-weight-bold: 700;
-
-    /* --modal-width:  */
 }
 
 /* GLOBAL ============================= */
@@ -84,6 +82,14 @@ section {
 h3 {
     font-size: var(--font-size-medium);
     margin-bottom: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: initial;
 }
 
 

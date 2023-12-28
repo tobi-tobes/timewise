@@ -2,7 +2,7 @@
 
 // Open extension in its own tab for better persistence
 chrome.action.onClicked.addListener(async () => {
-  await chrome.tabs.create({ url: chrome.runtime.getURL("components/views.html") });
+  await chrome.tabs.create({ url: chrome.runtime.getURL("components/main.html") });
 });
 
 // COUNTDOWN TIMER FUNCTIONALITY

@@ -9,37 +9,42 @@
         <header>
             <div class="logo"></div>
             <h1>Time<span>Wise</span></h1>
-            <button class="back-btn">BACK</button>
+            <button class="back-btn"><a href="./main.html">BACK</a></button>
         </header>
         <main>
-            <!-- ALL-TIME STATS -->
-            <div class="all-time">
-                <h3>All-time Stats</h3>
-                <div class="total-sessions stats-card">
-                    <p class="time"></p>
-                    <p class="label"></p>
-                </div>
-                <div class="total-time stats-card">
-                    <p class="time"></p>
-                    <p class="label"></p>
-                </div>
-                <div class="total-break-time stats-card">
-                    <p class="time"></p>
-                    <p class="label"></p>
-                </div>
-                <div class="avg-session-length stats-card">
-                    <p class="time"></p>
-                    <p class="label"></p>
-                </div>
-            </div>
-            <!-- DAILY STATS -->
-            <div class="daily">
-                <div class="calendar"></div>
-                <hr>
-                <div class="today-stats">
-                    <p class="today-date"></p>
-                    <p>Time spent wisely: <span class="time"></span></p>
-                </div>
+            <h2>Your Stats</h2>
+            <div class="stats-container">
+                <!-- ALL-TIME STATS -->
+                <section class="all-time">
+                    <h3>All-time Stats</h3>
+                    <div class="stats-card-container">
+                        <div class="total-sessions stats-card">
+                            <p class="time">20</p>
+                            <p class="label">Total sessions</p>
+                        </div>
+                        <div class="total-time stats-card">
+                            <p class="time">100 mins</p>
+                            <p class="label">Spent wisely</p>
+                        </div>
+                        <div class="total-break-time stats-card">
+                            <p class="time">30 mins</p>
+                            <p class="label">Total break time taken</p>
+                        </div>
+                        <div class="avg-session-length stats-card">
+                            <p class="time">60 mins</p>
+                            <p class="label">Average session length</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- DAILY STATS -->
+                <section class="daily">
+                    <div class="calendar"></div>
+                    <hr>
+                    <div class="today-stats">
+                        <p class="today-date">Thursday, December 28</p>
+                        <p>Time spent wisely: <span class="time">50 mins</span></p>
+                    </div>
+                </section>
             </div>
         </main>
     </body>
