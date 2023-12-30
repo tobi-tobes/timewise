@@ -65,15 +65,15 @@ $(document).ready(function() {
   document.querySelector('.today-date').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   // Display total working minutes for current date
-  const todayDate = new Date();
+//   const todayDate = new Date();
 
-  const todayData = getDailyData(todayDate);
+//   const todayData = getDailyData(todayDate);
 
-  if (todayData) {
-    document.querySelector('.today-stats p span.time').innerText = `${todayData.focusedWorkMinutes} mins`;
-  } else {
-    document.querySelector('.today-stats p span.time').innerText = `0 mins`;
-  }
+//   if (todayData) {
+//     document.querySelector('.today-stats p span.time').innerText = `${todayData.focusedWorkMinutes} mins`;
+//   } else {
+//     document.querySelector('.today-stats p span.time').innerText = `0 mins`;
+//   }
 
   // Get all td elements (days) within the calendar
   const days = document.querySelectorAll('.dycalendar-body td');
