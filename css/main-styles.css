@@ -68,6 +68,7 @@ main {
     font-weight: var(--font-weight-bold);
     cursor: pointer;
     color: var(--color-white);
+    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 [class*="-btn"]:hover {
@@ -149,7 +150,7 @@ span {
     height: 15rem;
     width: 12rem;
     flex-shrink: 0;
-    margin-right: 1rem;
+    margin-right: 2rem;
     text-align: center;
     display: flex;
     align-items: center;
@@ -159,11 +160,9 @@ span {
     border: 1px solid var(--color-primary);
     cursor: pointer;
     font-size: 1.3rem;
-    background-image: url('../images/preset-timer-background.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     color: var(--color-primary);
+    box-shadow: 1px 2px 0px 1px #03045E;
+    background-color: var(--color-white);
 }
 
 .timers {
@@ -232,7 +231,7 @@ span {
 .strict-mode-toggle-inner {
     height: 30px;
     width: 60px;
-    border: 1px solid black;
+    border: 1px solid var(--color-primary);
     border-radius: 35px;
     margin-top: 3px;
     background-color: var(--color-accent);
@@ -242,7 +241,7 @@ span {
     border-radius: 50%;
     height: 35px;
     width: 35px;
-    border: 1px solid black;
+    border: 1px solid var(--color-primary);
     position: absolute;
     top: 0;
     background-color: var(--color-white);
@@ -268,6 +267,11 @@ span {
 
 #site-blacklist {
     border-radius: 10px;
+    box-shadow: 3px 4px 0px 1px #03045E;
+    border: 1px solid var(--color-primary);
+    resize: none;
+    padding: 10px;
+    outline: none;
 }
 
 .timer-config-buttons {
@@ -275,7 +279,7 @@ span {
     width: 95%;
     justify-content: space-between;
     align-items: center;
-    margin-top: 4rem;
+    margin-top: 3rem;
 }
 
 .back-btn {

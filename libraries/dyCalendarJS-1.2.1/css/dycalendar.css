@@ -155,7 +155,7 @@
  *-------------------------------------------------*/
  .dycalendar-container.timewise {
     color : #090909;
-    background-color: #90E0EF;
+    background-color: #CAF0F8;
     border : solid 1px #03045E;
 }
 
@@ -312,6 +312,16 @@
     -moz-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
     -webkit-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+/*
+  * calendar shadow  (shadow-timewise)
+  *-------------------------------------------------*/
+  .dycalendar-container.shadow-timewise {
+    -o-box-shadow: 3px 4px 0px 1px #03045E;
+    -moz-box-shadow: 3px 4px 0px 1px #03045E;
+    -webkit-box-shadow: 3px 4px 0px 1px #03045E;
+    box-shadow: 3px 4px 0px 1px #03045E;
 }
 
 /*
