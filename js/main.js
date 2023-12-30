@@ -64,6 +64,7 @@ function updateTotalSessions() {
 
     // Update the total number of sessions
     totalSessions = parseInt(totalSessions) + 1;
+    console.log(totalSessions);
 
     // Save the updated total number of sessions back to storage
     chrome.storage.local.set({'totalSessions': totalSessions});

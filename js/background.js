@@ -88,8 +88,10 @@ let breakStartTime;
 
 // Listen for messages from pop-up script to start, pause, play, or end timer
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  timerState.isPaused = request.timerState.isPaused;
-  timerState.isRunning = request.timerState.isRunning;
+  if (request.timerState) {
+    timerState.isPaused = request.timerState.isPaused;
+    timerState.isRunning = request.timerState.isRunning;
+  }
   switch (request.action) {
     // Handle timer starting
     case 'startTimer':
@@ -171,4 +173,7 @@ function unSetDeclarativeNetRequestRules(blockedSites) {
       removeRuleIds: [id]
     });
   });
+
+  // testing with content-script
+  chrome.runtime.sendMessage({ type: 'sendDataToDashboard', data: { example: 'data' } });
 }

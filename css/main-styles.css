@@ -388,7 +388,8 @@ span {
     z-index: 1000;
     height: 510px;
     width: 600px;
-    left: 0;
+    left: auto;
+    right: auto;
     padding: 0;
 }
 
