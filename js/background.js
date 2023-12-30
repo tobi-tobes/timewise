@@ -1,5 +1,10 @@
 // background.js
 
+// Open extension in its own tab for better persistence
+chrome.action.onClicked.addListener(async () => {
+  await chrome.tabs.create({ url: chrome.runtime.getURL("components/main.html") });
+});
+
 // HELPER FUNCTIONS
 // Function to keep track of total break time taken on extension
 function updateTotalBreakTime(minutes) {
@@ -28,11 +33,6 @@ function updateTotalTimeSpent(minutes) {
     chrome.storage.local.set({'totalTimeSpent': totalMinutes});
   });
 }
-
-// Open extension in its own tab for better persistence
-chrome.action.onClicked.addListener(async () => {
-  await chrome.tabs.create({ url: chrome.runtime.getURL("components/main.html") });
-});
 
 // COUNTDOWN TIMER FUNCTIONALITY
 // Initialize timer state
@@ -88,8 +88,8 @@ let breakStartTime;
 
 // Listen for messages from pop-up script to start, pause, play, or end timer
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  timerState.isRunning = request.timerState.isRunning;
   timerState.isPaused = request.timerState.isPaused;
+  timerState.isRunning = request.timerState.isRunning;
   switch (request.action) {
     // Handle timer starting
     case 'startTimer':
@@ -98,7 +98,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const blockedSites = result.blockedSites || [];
         setDeclarativeNetRequestRules(blockedSites);
       });
-      startCountdownTimer(request.timerState.timeRemaining);
+      const selectedTime = request.timerState.timeRemaining;
+      timerState.timeRemaining = selectedTime;
+      startCountdownTimer(selectedTime);
       break;
     // Handle timer pausing
     case 'pauseTimer':
@@ -128,7 +130,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
       updateTotalTimeSpent(Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
       // Send message to main.js with time spent for daily stats
-      chrome.runtime.sendMessage({ action: 'saveUnfinishedTime', unfinishedTime: Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60)});
+      // chrome.runtime.sendMessage({ action: 'saveUnfinishedTime', unfinishedTime: Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60)});
       break;
     default:
       break;

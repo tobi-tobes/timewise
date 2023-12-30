@@ -3,7 +3,7 @@
 
 // HELPER FUNCTIONS
 // Function to format a date as "YYYY-MM-DD"
-function formatDate(date) {
+/* function formatDate(date) {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const day = date.getDate().toString().padStart(2, '0');
@@ -32,15 +32,15 @@ function storeDailyData(minutes) {
     dataToUpdate[formattedDate] = currentData;
     chrome.storage.local.set(dataToUpdate);
   });
-}
+} */
 
-// Function to get total time spent for a specific date
+/* // Function to get total time spent for a specific date
 function getTotalTimeSpent(date) {
   const formattedDate = formatDate(date);
   chrome.storage.local.get(formattedDate, (result) => {
     callback(result[formattedDate] || null);
   });
-}
+} */
 
 // Function to keep track of total time spent on extension
 function updateTotalTimeSpent(minutes) {
@@ -201,7 +201,7 @@ $(document).ready(function() {
   yesBtn.addEventListener('click', () => {
     endTimerModal.classList.add('hidden');
     activeTimerNonStrict.classList.add('hidden');
-    chrome.runtime.sendMessage({ action: 'endTimer', timerState: { isRunning: false, isPaused: false } });
+    chrome.runtime.sendMessage({ action: 'endTimer', timerState: { isRunning: false, isPaused: false, timeRemaining: durationInSeconds } });
     homePage.classList.remove('hidden');
   });
 
