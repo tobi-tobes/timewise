@@ -45,20 +45,20 @@ $(document).ready(function() {
   }
 
   // Update stats dashboard with average session length
-  if (totalSessionsCount == 0) {
-    avgSessionLength.textContent = '0 mins';
-  } else {
-    const average = totalTimeSpent / totalSessionsCount;
-    if (average < 60) {
-      avgSessionLength.textContent = `${average} mins`;
-    } else if (average === 60) {
-      avgSessionLength.textContent = '1 h';
-    } else {
-      const minutes = average % 60;
-      const hours = Math.floor(average / 60);
-      avgSessionLength.textContent = `${hours} h ${minutes} mins`;
-    }
-  }
+//   if (totalSessionsCount == 0) {
+//     avgSessionLength.textContent = '0 mins';
+//   } else {
+//     const average = totalTimeSpent / totalSessionsCount;
+//     if (average < 60) {
+//       avgSessionLength.textContent = `${average} mins`;
+//     } else if (average === 60) {
+//       avgSessionLength.textContent = '1 h';
+//     } else {
+//       const minutes = average % 60;
+//       const hours = Math.floor(average / 60);
+//       avgSessionLength.textContent = `${hours} h ${minutes} mins`;
+//     }
+//   }
 
   // DAILY STATS FUNCTIONALITY
   // Get current date to display on dashboard
