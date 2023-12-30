@@ -78,7 +78,7 @@ $(document).ready(function() {
   // Get all td elements (days) within the calendar
   const days = document.querySelectorAll('.dycalendar-body td');
 
-  days.forEach(day => {
+  /* days.forEach(day => {
     day.addEventListener('click', function() {
         // Handle display of data for each day
 
@@ -107,5 +107,5 @@ $(document).ready(function() {
         // Display selected date on dashboard
         document.querySelector('.today-date').innerText = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     });
-  });
+  }); */
 });

@@ -1,7 +1,7 @@
 // Storage.js - HELPER FUNCTIONS AND VARIABLES FOR DATA COLLECTION FOR STATS
 
 // Function to format a date as "YYYY-MM-DD"
-function formatDate(date) {
+export function formatDate(date) {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const day = date.getDate().toString().padStart(2, '0');
@@ -9,7 +9,7 @@ function formatDate(date) {
 }
 
 // Function to get data for a specific date
-function getDailyData(date) {
+export function getDailyData(date) {
   const formattedDate = formatDate(date);
   chrome.storage.local.get(formattedDate, (result) => {
     callback(result[formattedDate] || null);
@@ -17,7 +17,7 @@ function getDailyData(date) {
 }
 
 // Function to store daily data
-function storeDailyData(minutes) {
+export function storeDailyData(minutes) {
   const currentDate = new Date();
   const formattedDate = formatDate(currentDate);
   
@@ -33,7 +33,7 @@ function storeDailyData(minutes) {
 }
 
 // Function to get total time spent for a specific date
-function getTotalTimeSpent(date) {
+export function getTotalTimeSpent(date) {
   const formattedDate = formatDate(date);
   chrome.storage.local.get(formattedDate, (result) => {
     callback(result[formattedDate] || null);
@@ -41,7 +41,7 @@ function getTotalTimeSpent(date) {
 }
 
 // Function to keep track of total time spent on extension
-function updateTotalTimeSpent(minutes) {
+export function updateTotalTimeSpent(minutes) {
   // Retrieve the existing total time from storage
   chrome.storage.local.get('totalTimeSpent', function(data) {
     let totalMinutes = data.totalTimeSpent || 0;
@@ -55,7 +55,7 @@ function updateTotalTimeSpent(minutes) {
 }
 
 // Function to keep track of total number of sessions
-function updateTotalSessions() {
+export function updateTotalSessions() {
   // Retrieve the existing total number of sessions from storage
   chrome.storage.local.get('totalSessions', function(data) {
     let totalSessions = data.totalSessions || 0;
@@ -69,7 +69,7 @@ function updateTotalSessions() {
 }
 
 // Function to keep track of total break time taken on extension
-function updateTotalBreakTime(minutes) {
+export function updateTotalBreakTime(minutes) {
   // Retrieve the existing total break time from storage
   chrome.storage.local.get('totalBreakTime', function(data) {
     let totalMinutes = data.totalBreakTime || 0;

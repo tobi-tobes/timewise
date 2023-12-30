@@ -1,5 +1,34 @@
 // background.js
 
+// HELPER FUNCTIONS
+// Function to keep track of total break time taken on extension
+function updateTotalBreakTime(minutes) {
+  // Retrieve the existing total break time from storage
+  chrome.storage.local.get('totalBreakTime', function(data) {
+    let totalMinutes = data.totalBreakTime || 0;
+
+    // Update the total break time
+    totalMinutes = parseInt(totalMinutes) + minutes;
+
+    // Save the updated total break time back to storage
+    chrome.storage.local.set({'totalBreakTime': totalMinutes});
+  });
+}
+
+// Function to keep track of total time spent on extension
+function updateTotalTimeSpent(minutes) {
+  // Retrieve the existing total time from storage
+  chrome.storage.local.get('totalTimeSpent', function(data) {
+    let totalMinutes = data.totalTimeSpent || 0;
+
+    // Update the total time
+    totalMinutes = parseInt(totalMinutes) + minutes;
+
+    // Save the updated total time back to storage
+    chrome.storage.local.set({'totalTimeSpent': totalMinutes});
+  });
+}
+
 // Open extension in its own tab for better persistence
 chrome.action.onClicked.addListener(async () => {
   await chrome.tabs.create({ url: chrome.runtime.getURL("components/main.html") });
