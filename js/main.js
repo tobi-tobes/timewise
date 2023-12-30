@@ -203,6 +203,8 @@ $(document).ready(function() {
       updateTotalTimeSpent(Math.ceil((durationInSeconds) / 60));
       // Update number of sessions
       updateTotalSessions();
+      // Save finished time to daily data
+      storeDailyData(Math.ceil((durationInSeconds) / 60));
     }
   });
 

@@ -118,6 +118,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         unSetDeclarativeNetRequestRules(blockedSites);
       });
       updateTotalTimeSpent(Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
+      // Save time to daily data
+      storeDailyData(Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
       break;
     default:
       break;

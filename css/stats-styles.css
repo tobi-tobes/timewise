@@ -223,20 +223,23 @@ span {
     background: transparent;
 }
 
-.calendar {
-    width: 35rem;
-    height: 20rem;
-    border: 1px solid black;
+#calendar {
     align-self: center;
     margin-top: 1.5rem;
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 20rem;
 }
 
 .today-stats {
     margin-top: 8px;
     margin-left: 4rem;
+    margin-bottom: 2rem;
 }
 
 hr {
