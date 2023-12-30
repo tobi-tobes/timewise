@@ -70,7 +70,7 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
   if (totalSessionsCount == 0) {
     avgSessionLength.textContent = '0 mins';
   } else {
-    const average = totalTimeSpent / totalSessionsCount;
+    const average = Math.ceil(totalTimeSpent / totalSessionsCount);
     if (average < 60) {
       avgSessionLength.textContent = `${average} mins`;
     } else if (average === 60) {

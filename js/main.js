@@ -47,7 +47,6 @@ function updateTotalSessions() {
 
     // Update the total number of sessions
     totalSessions = parseInt(totalSessions) + 1;
-    console.log(totalSessions);
 
     // Save the updated total number of sessions back to storage
     chrome.storage.local.set({'totalSessions': totalSessions});
@@ -145,6 +144,9 @@ $(document).ready(function() {
     // Save the updated blockedSites array to chrome.storage
     chrome.storage.local.set({ 'blockedSites': blockedSites });
   }
+
+  // Make sure textarea is cleared every time before new session
+  siteBlacklistTextarea.value = '';
 
   siteBlacklistTextarea.addEventListener('input', () => {
     // Update the site blacklist array
