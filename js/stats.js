@@ -8,6 +8,13 @@ $(document).ready(function() {
   const totalBreakTime = document.querySelector('.total-break-time .time');
   const avgSessionLength = document.querySelector('.avg-session-length .time');
 
+  // Listen for messages from the extension
+  window.addEventListener('message', function(event) {
+    if (event.data.type === 'sendDataToDashboard') {
+      console.log(event.data.data);
+    }
+  });
+
   // Update stats dashboard with total time
   let totalTimeSpent = localStorage.getItem('totalTimeSpent') || 0;
   if (totalTimeSpent < 60) {

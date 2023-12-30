@@ -2,33 +2,6 @@
 // Main script file for the functionality of the extension
 
 $(document).ready(function() {
-  // HELPER FUNCTIONS AND VARIABLES FOR DATA COLLECTION FOR STATS
-
-  // Function to keep track of total time spent on extension
-  function updateTotalTimeSpent(minutes) {
-    // Retrieve the existing total time from storage
-    let totalMinutes = localStorage.getItem('totalTimeSpent') || 0;
-  
-    // Update the total time
-    totalMinutes = parseInt(totalMinutes) + minutes;
-  
-    // Save the updated total time back to storage
-    localStorage.setItem('totalTimeSpent', totalMinutes);
-  }
-
-  // Function to keep track of total number of sessions
-  function updateTotalSessions() {
-    // Retrieve the existing total number of sessions from storage
-    let totalSessions = localStorage.getItem('totalSessions') || 0;
-  
-    // Update the total number of sessions
-    totalSessions = parseInt(totalSessions) + 1;
-  
-    // Save the updated total time back to storage
-    localStorage.setItem('totalSessions', totalSessions);
-  }
-
-
   // HOME PAGE FUNCTIONALITY
 
   // Pre-set timers selection
@@ -205,6 +178,8 @@ $(document).ready(function() {
       updateTotalSessions();
       // Save finished time to daily data
       storeDailyData(Math.ceil((durationInSeconds) / 60));
+    } else if (request.action === 'saveUnfinishedTime') {
+      storeDailyData(request.unfinishedTime);
     }
   });
 
