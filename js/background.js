@@ -132,7 +132,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
       updateTotalTimeSpent(Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
       // Send message to main.js with time spent for daily stats
-      // chrome.runtime.sendMessage({ action: 'saveUnfinishedTime', unfinishedTime: Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60)});
+      chrome.runtime.sendMessage({ action: 'saveUnfinishedTime', unfinishedTime: Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60)});
       break;
     default:
       break;
@@ -173,7 +173,4 @@ function unSetDeclarativeNetRequestRules(blockedSites) {
       removeRuleIds: [id]
     });
   });
-
-  // testing with content-script
-  chrome.runtime.sendMessage({ type: 'sendDataToDashboard', data: { example: 'data' } });
 }

@@ -1,21 +1,14 @@
 // main.js
 // Main script file for the functionality of the extension
 
-// HELPER FUNCTIONS
+// HELPER FUNCTIONS AND VARIABLES
+
 // Function to format a date as "YYYY-MM-DD"
-/* function formatDate(date) {
+function formatDate(date) {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const day = date.getDate().toString().padStart(2, '0');
   return `${year}-${month}-${day}`;
-}
-
-// Function to get data for a specific date
-function getDailyData(date) {
-  const formattedDate = formatDate(date);
-  chrome.storage.local.get(formattedDate, (result) => {
-    callback(result[formattedDate] || null);
-  });
 }
 
 // Function to store daily data
@@ -23,24 +16,14 @@ function storeDailyData(minutes) {
   const currentDate = new Date();
   const formattedDate = formatDate(currentDate);
   
-  getDailyData(currentDate, (currentData) => {
-    currentData = currentData || {};
-    currentData.focusedWorkMinutes = (currentData.focusedWorkMinutes || 0) + minutes;
+  chrome.storage.local.get('dailyStorage', (result) => {
+    const storage = result.dailyStorage || {};
+    storage[formattedDate] = (storage[formattedDate] || 0) + minutes;
 
-    // Update the storageData object
-    const dataToUpdate = {};
-    dataToUpdate[formattedDate] = currentData;
-    chrome.storage.local.set(dataToUpdate);
+    // Save the updated total time for the day back to storage
+    chrome.storage.local.set({'dailyStorage': storage});
   });
-} */
-
-/* // Function to get total time spent for a specific date
-function getTotalTimeSpent(date) {
-  const formattedDate = formatDate(date);
-  chrome.storage.local.get(formattedDate, (result) => {
-    callback(result[formattedDate] || null);
-  });
-} */
+}
 
 // Function to keep track of total time spent on extension
 function updateTotalTimeSpent(minutes) {
