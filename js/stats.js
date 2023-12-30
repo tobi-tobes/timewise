@@ -28,8 +28,8 @@ $(document).ready(function() {
   }
 
   // Update stats dashboard with total number of sessions
-  let totalSessionsCount = localStorage.getItem('totalSessions') || 0;
-  totalSessions.textContent = `${totalSessionsCount}`;
+//   let totalSessionsCount = localStorage.getItem('totalSessions') || 0;
+//   totalSessions.textContent = `${totalSessionsCount}`;
 
   // Update stats dashboard with total break time taken
   let totalBreakTimeSpent = localStorage.getItem('totalBreakTime') || 0;
