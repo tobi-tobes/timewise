@@ -152,14 +152,18 @@ span {
     margin-right: 1rem;
     text-align: center;
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content: center;
     font-weight: 600;
     border-radius: 10px;
     border: 1px solid var(--color-primary);
     cursor: pointer;
-    padding-bottom: 1rem;
     font-size: 1.3rem;
+    background-image: url('../images/preset-timer-background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--color-primary);
 }
 
 .timers {
