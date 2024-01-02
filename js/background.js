@@ -46,8 +46,8 @@ let countdownInterval;
 
 // Function to update the timer display
 function updateTimerDisplay() {
-  const hours = Math.floor(timerState.timeRemaining / 3600);
-  const minutes = Math.floor((timerState.timeRemaining % 3600) / 60);
+  const hours = Math.round(timerState.timeRemaining / 3600);
+  const minutes = Math.round((timerState.timeRemaining % 3600) / 60);
   const seconds = timerState.timeRemaining % 60;
 
   // Send message to pop-up script to display the time in hours, minutes, and seconds
@@ -130,9 +130,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const blockedSites = result.blockedSites || [];
         unSetDeclarativeNetRequestRules(blockedSites);
       });
-      updateTotalTimeSpent(Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
+      updateTotalTimeSpent(Math.round((request.timerState.timeRemaining - timerState.timeRemaining) / 60));
       // Send message to main.js with time spent for daily stats
-      chrome.runtime.sendMessage({ action: 'saveUnfinishedTime', unfinishedTime: Math.ceil((request.timerState.timeRemaining - timerState.timeRemaining) / 60)});
+      chrome.runtime.sendMessage({ action: 'saveUnfinishedTime', unfinishedTime: Math.round((request.timerState.timeRemaining - timerState.timeRemaining) / 60)});
       break;
     default:
       break;

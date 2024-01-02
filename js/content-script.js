@@ -24,7 +24,7 @@ function displayWorkingMinutesForSelectedDay(date) {
       document.querySelector('.today-stats p span.time').innerText = `1 h`;
     } else {
       const minutes = dailyData % 60;
-      const hours = Math.floor(dailyData / 60);
+      const hours = Math.round(dailyData / 60);
       document.querySelector('.today-stats p span.time').innerText = `${hours} h ${minutes} mins`;
     }
   });
@@ -44,7 +44,7 @@ function displayDailyGoal() {
       dailyGoalDisplay.innerText = `1 h`;
     } else {
       const minutes = dailyGoal % 60;
-      const hours = Math.floor(dailyGoal / 60);
+      const hours = Math.round(dailyGoal / 60);
       dailyGoalDisplay.innerText = `${hours} h ${minutes} mins`;
     }
   });
@@ -65,7 +65,7 @@ function displayWorkingMinutesForCurrentDay() {
       document.querySelector('.daily-goal-container p').innerText = `1 h/`;
     } else {
       const minutes = todayData % 60;
-      const hours = Math.floor(todayData / 60);
+      const hours = Math.round(todayData / 60);
       document.querySelector('.daily-goal-container p').innerText = `${hours} h ${minutes} mins/`;
     }
   });
@@ -89,21 +89,21 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
     totalTime.textContent = '1 h';
   } else {
     const minutes = totalTimeSpent % 60;
-    const hours = Math.floor(totalTimeSpent / 60);
+    const hours = Math.round(totalTimeSpent / 60);
     totalTime.textContent = `${hours} h ${minutes} mins`;
   }
 
   // Update stats dashboard with total break time taken
   const totalBreakTime = document.querySelector('.total-break-time .time');
   let totalBreakTimeSpent = data.totalBreakTime || 0;
-  const totalBreakTimeSpentInMins = Math.ceil(totalBreakTimeSpent / (1000 * 60));
+  const totalBreakTimeSpentInMins = Math.round(totalBreakTimeSpent / (1000 * 60));
   if (totalBreakTimeSpentInMins < 60) {
     totalBreakTime.textContent = `${totalBreakTimeSpentInMins} mins`;
   } else if (totalBreakTimeSpentInMins === 60) {
     totalBreakTime.textContent = '1 h';
   } else {
     const minutes = totalBreakTimeSpentInMins % 60;
-    const hours = Math.floor(totalBreakTimeSpentInMins / 60);
+    const hours = Math.round(totalBreakTimeSpentInMins / 60);
     totalBreakTime.textContent = `${hours} h ${minutes} mins`;
   }
 
@@ -112,14 +112,14 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
   if (totalSessionsCount == 0) {
     avgSessionLength.textContent = '0 mins';
   } else {
-    const average = Math.ceil(totalTimeSpent / totalSessionsCount);
+    const average = Math.round(totalTimeSpent / totalSessionsCount);
     if (average < 60) {
       avgSessionLength.textContent = `${average} mins`;
     } else if (average === 60) {
       avgSessionLength.textContent = '1 h';
     } else {
       const minutes = average % 60;
-      const hours = Math.floor(average / 60);
+      const hours = Math.round(average / 60);
       avgSessionLength.textContent = `${hours} h ${minutes} mins`;
     }
   }
@@ -137,6 +137,7 @@ const days = document.querySelectorAll('.dycalendar-body td');
 days.forEach(day => {
   day.addEventListener('click', function() {
     // Handle display of data for each day
+    console.log(`${day} clicked`);
 
     // Retrieve date from HTML elements to use to generate Date object
     const clickedDay = day.innerHTML;
@@ -189,5 +190,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Update UI if daily goal has been reached
 const dailyGoalContainer = document.querySelector('.daily-goal');
 if (todayData === dailyGoal) {
-  dailyGoalContainer.classList.add('.goal-reached', '.glowing-border');
+  dailyGoalContainer.classList.add('goal-reached', 'glowing-border');
+} else {
+  dailyGoalContainer.classList.remove('goal-reached', 'glowing-border');
 }

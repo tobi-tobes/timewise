@@ -228,11 +228,11 @@ $(document).ready(function() {
       // Show timer done modal when timer is done running
       timerDoneModal.classList.remove('hidden');
       // Save finished time to storage
-      updateTotalTimeSpent(Math.ceil((durationInSeconds) / 60));
+      updateTotalTimeSpent(Math.round((durationInSeconds) / 60));
       // Update number of sessions
       updateTotalSessions();
       // Save finished time to daily data
-      storeDailyData(Math.ceil((durationInSeconds) / 60));
+      storeDailyData(Math.round((durationInSeconds) / 60));
       // Send message to content script to update UI on time worked for current day
       chrome.runtime.sendMessage({ action: 'updateCurrentDay' });
     } else if (request.action === 'saveUnfinishedTime') {
