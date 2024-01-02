@@ -36,4 +36,33 @@ $(document).ready(function() {
     calendarView.classList.add('hidden');
     weeklyView.classList.remove('hidden');
   });
+
+  // Create bar chart using Chart.js library
+  // const ctx = document.getElementById('weekly-chart');
+
+  // new Chart(ctx, {
+  //   type: 'bar',
+  //   data: {
+  //     labels: pastWeekArray,
+  //     datasets: [{
+  //       label: 'Weekly View',
+  //       data: weekWorkingHours,
+  //       borderWidth: 1
+  //     }]
+  //   },
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         beginAtZero: true
+  //       }
+  //     }
+  //   }
+  // });
+
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'drawChart') {
+      console.log(request.data.labels);
+      console.log(request.data.data);
+    }
+  });
 });

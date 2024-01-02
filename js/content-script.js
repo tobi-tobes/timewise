@@ -184,16 +184,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'updateCurrentDay') {
     // Update the UI to display working minutes for current day
     displayWorkingMinutesForCurrentDay();
+    // Update UI if daily goal has been reached
+    const dailyGoalContainer = document.querySelector('.daily-goal');
+    if (todayData === dailyGoal) {
+      dailyGoalContainer.classList.add('goal-reached', 'glowing-border');
+    } else {
+      dailyGoalContainer.classList.remove('goal-reached', 'glowing-border');
+    }
   }
 });
-
-// Update UI if daily goal has been reached
-const dailyGoalContainer = document.querySelector('.daily-goal');
-if (todayData === dailyGoal) {
-  dailyGoalContainer.classList.add('goal-reached', 'glowing-border');
-} else {
-  dailyGoalContainer.classList.remove('goal-reached', 'glowing-border');
-}
 
 
 // WEEKLY STATS FUNCTIONALITY
@@ -236,27 +235,7 @@ chrome.storage.local.get('dailyStorage', (result) => {
   }
 });
 
-// Ensure document and scripts have fully loaded before creating the bar chart
-document.addEventListener("DOMContentLoaded", function() {
-  // Create bar chart using Chart.js library
-  const ctx = document.getElementById('weekly-chart');
+console.log(pastWeekArray);
+console.log(weekWorkingHours);
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: pastWeekArray,
-      datasets: [{
-        label: 'Weekly View',
-        data: weekWorkingHours,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-});
+chrome.runtime.sendMessage({ action: 'drawChart', data: { labels: pastWeekArray, data: weekWorkingHours } });
