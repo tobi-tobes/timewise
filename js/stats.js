@@ -59,10 +59,11 @@ $(document).ready(function() {
   //   }
   // });
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'drawChart') {
-      console.log(request.data.labels);
-      console.log(request.data.data);
+  window.addEventListener('message', function(event) {
+    if (event.source === window && event.data.action === 'drawChart') {
+      console.log(event.data.data.labels);
+      console.log(event.data.data.data);
+      // Handle the data and draw the chart
     }
   });
 });
