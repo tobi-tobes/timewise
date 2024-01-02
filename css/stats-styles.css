@@ -253,7 +253,7 @@ span {
     align-items: center;
     width: 20rem;
     height: 20rem;
-    border: 1px solid black;
+    border: 1px solid #03045E;
 }
 
 .daily-goal {
@@ -264,6 +264,38 @@ span {
     margin-top: 1.5rem;
     padding-left: 1rem;
 }
+
+.goal-reached {
+    background-color: #90F0BE;
+}
+
+.glowing-border {
+    position: relative;
+}
+
+@keyframes glowing {
+    0% {
+      box-shadow: 0 0 5px #90F09E;
+    }
+    50% {
+      box-shadow: 0 0 20px #90F09E;
+    }
+    100% {
+      box-shadow: 0 0 5px #90F09E;
+    }
+}
+
+.glowing-border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: inherit;
+    animation: glowing 2s infinite;
+  }
 
 .daily-goal-container {
     display: flex;

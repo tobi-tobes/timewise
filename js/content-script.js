@@ -30,6 +30,9 @@ function displayWorkingMinutesForSelectedDay(date) {
   });
 }
 
+let dailyGoal;
+let todayData;
+
 // Function to display daily goal
 function displayDailyGoal() {
   chrome.storage.local.get('dailyGoal', (result) => {
@@ -54,7 +57,7 @@ function displayWorkingMinutesForCurrentDay() {
 
   chrome.storage.local.get('dailyStorage', (result) => {
     const storage = result.dailyStorage || {};
-    const todayData = storage[formattedDate] || 0;
+    todayData = storage[formattedDate] || 0;
 
     if (todayData < 60) {
       document.querySelector('.daily-goal-container p').innerText = `${todayData} mins/`;
@@ -166,7 +169,7 @@ displayDailyGoal();
 const dailyGoalForm = document.querySelector('.daily-goal-creator');
 const dailyWorkingHoursInput = document.getElementById('daily-working-hours');
 
-dailyGoalForm.addEventListener('submit', () => {
+dailyGoalForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const dailyWorkingHoursGoal = parseInt(dailyWorkingHoursInput.value, 10);
@@ -182,3 +185,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     displayWorkingMinutesForCurrentDay();
   }
 });
+
+// Update UI if daily goal has been reached
+const dailyGoalContainer = document.querySelector('.daily-goal');
+if (todayData === dailyGoal) {
+  dailyGoalContainer.classList.add('.goal-reached', '.glowing-border');
+}
