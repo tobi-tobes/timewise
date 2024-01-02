@@ -6,6 +6,7 @@
         <link rel="icon" type="image/png" href="./images/logo.png">
         <link rel="stylesheet" href="./css/stats-styles.css">
         <link rel="stylesheet" href="./libraries/dyCalendarJS-1.2.1/css/dycalendar.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="text/javascript" src="./libraries/jquery-3.7.1.min.js"></script>
         <script type="text/javascript" src="./js/stats.js"></script>
     </head>
@@ -40,29 +41,40 @@
                         </div>
                     </div>
                 </section>
-                <!-- DAILY STATS -->
                 <section class="daily">
-                    <h3>Daily Stats</h3>
-                    <div class="daily-stats-container">
-                        <div id="calendar" class="dycalendar-container timewise round-edge shadow-timewise">
-                        </div>
-                        <!-- JavaScript to draw calendar using calendar library -->
-                        <script src="./libraries/dyCalendarJS-1.2.1/js/dycalendar.min.js"></script>
-                        <script>
-                            dycalendar.draw({
-                                target: '#calendar',
-                                type: 'month',
-                                highlighttoday: true,
-                                prevnextbutton : "show"
-                            });
-                        </script>
-                        <div class="daily-goal stats-card">
-                            <h4>Daily goal</h4>
-                            <div class="daily-goal-container">
-                                <p></p><span></span>
-                                <button class="edit-daily-goal"></button>
+                    <!-- DAILY STATS -->
+                    <div class="calendar-view">
+                        <h3>Daily Stats</h3>
+                        <div class="daily-stats-container">
+                            <div id="calendar" class="dycalendar-container timewise round-edge shadow-timewise">
                             </div>
+                            <!-- JavaScript to draw calendar using calendar library -->
+                            <script src="./libraries/dyCalendarJS-1.2.1/js/dycalendar.min.js"></script>
+                            <script>
+                                dycalendar.draw({
+                                    target: '#calendar',
+                                    type: 'month',
+                                    highlighttoday: true,
+                                    prevnextbutton : "show"
+                                });
+                            </script>
+                            <div class="daily-goal stats-card">
+                                <h4>Daily goal</h4>
+                                <div class="daily-goal-container">
+                                    <p></p><span></span>
+                                    <button class="edit-daily-goal"></button>
+                                </div>
+                            </div>
+                            <button class="view-btn">Weekly view</button>
                         </div>
+                    </div>
+                    <!-- WEEKLY STATS -->
+                    <div class="weekly hidden">
+                        <h3>Weekly Stats</h3>
+                        <div class="chart-container">
+                            <canvas id="weekly-chart"></canvas>
+                        </div>
+                        <button class="view-btn">Calendar view</button>
                     </div>
                     <form class="daily-goal-creator stats-card hidden">
                         <p>Update goal</p>
@@ -78,10 +90,6 @@
                         <p class="today-date"></p>
                         <p>Time spent wisely: <span class="time"></span></p>
                     </div>
-                </section>
-                <!-- WEEKLY STATS -->
-                <section class="weekly hidden">
-                    
                 </section>
             </div>
         </main>

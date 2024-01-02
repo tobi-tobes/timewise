@@ -194,3 +194,69 @@ if (todayData === dailyGoal) {
 } else {
   dailyGoalContainer.classList.remove('goal-reached', 'glowing-border');
 }
+
+
+// WEEKLY STATS FUNCTIONALITY
+// Function to format a date as "YYYY-MM-DD"
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Function to fetch focused work minutes for the past 6 days before current day
+function fetchDataForThePastWeek() {
+  // Create array of dates for the week
+  const today = new Date();
+  let i = 6;
+  const weekArray = [];
+
+  while (i >= 0) {
+    const previousDate = new Date(today);
+    previousDate.setDate(today.getDate() - i);
+
+    const formattedDate = formatDate(previousDate);
+    weekArray.push(formattedDate);
+
+    i--;
+  }
+
+  return weekArray;
+}
+
+const pastWeekArray = fetchDataForThePastWeek();
+const weekWorkingHours = [];
+
+// Use array of formatted dates to fetch data from storage
+chrome.storage.local.get('dailyStorage', (result) => {
+  const storage = result.dailyStorage || {};
+  for (const formattedDate of pastWeekArray) {
+    weekWorkingHours.push(storage[formattedDate] || 0);
+  }
+});
+
+// Ensure document and scripts have fully loaded before creating the bar chart
+document.addEventListener("DOMContentLoaded", function() {
+  // Create bar chart using Chart.js library
+  const ctx = document.getElementById('weekly-chart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: pastWeekArray,
+      datasets: [{
+        label: 'Weekly View',
+        data: weekWorkingHours,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+});

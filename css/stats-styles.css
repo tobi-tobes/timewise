@@ -3,6 +3,7 @@
     2. HEADER
     3. ALL-TIME STATS
     4. DAILY STATS
+    5. WEEKLY STATS
 */
 
 /* Reset / Normalize
@@ -350,6 +351,14 @@ span {
     margin-bottom: 0;
 }
 
+.view-btn {
+    box-shadow: 1px 2px 0px 1px #03045E;
+    align-self: flex-end;
+    margin-bottom: -2px;
+    margin-right: 2rem;
+    margin-top: auto;
+}
+
 .cancel-btn {
     background-color: var(--color-accent);
     color: var(--color-black);
@@ -392,6 +401,20 @@ hr {
     font-weight: var(--font-weight-bold);
 }
 
+
+/* WEEKLY STATS ============================= */
+.weekly {
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container {
+    width: 50rem;
+    height: 20rem;
+    border: 1px solid black;
+    align-self: center;
+    margin-bottom: 2rem;
+}
 
 /* Display control ============================= */
 .hidden {

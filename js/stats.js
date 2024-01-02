@@ -20,4 +20,20 @@ $(document).ready(function() {
   cancelBtn.addEventListener('click', () => {
     dailyGoalCreator.classList.add('hidden');
   });
+
+  // Functionality to switch between calendar and weekly view
+  const weeklyViewBtn = document.querySelector('.calendar-view .view-btn');
+  const calendarViewBtn = document.querySelector('.weekly .view-btn');
+  const calendarView = document.querySelector('.calendar-view');
+  const weeklyView = document.querySelector('.weekly');
+
+  calendarViewBtn.addEventListener('click', () => {
+    calendarView.classList.remove('hidden');
+    weeklyView.classList.add('hidden');
+  });
+
+  weeklyViewBtn.addEventListener('click', () => {
+    calendarView.classList.add('hidden');
+    weeklyView.classList.remove('hidden');
+  });
 });
