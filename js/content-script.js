@@ -37,7 +37,7 @@ function displayDailyGoal() {
 
     if (dailyGoal < 60) {
       dailyGoalDisplay.innerText = `${dailyGoal} mins`;
-    } else if (dailyData === 60) {
+    } else if (dailyGoal === 60) {
       dailyGoalDisplay.innerText = `1 h`;
     } else {
       const minutes = dailyGoal % 60;
@@ -57,13 +57,13 @@ function displayWorkingMinutesForCurrentDay() {
     const todayData = storage[formattedDate] || 0;
 
     if (todayData < 60) {
-      document.querySelector('.daily-goal-container p').innerText = `${todayData} mins`;
+      document.querySelector('.daily-goal-container p').innerText = `${todayData} mins/`;
     } else if (todayData === 60) {
-      document.querySelector('.daily-goal-container p').innerText = `1 h`;
+      document.querySelector('.daily-goal-container p').innerText = `1 h/`;
     } else {
       const minutes = todayData % 60;
       const hours = Math.floor(todayData / 60);
-      document.querySelector('.daily-goal-container p').innerText = `${hours} h ${minutes} mins`;
+      document.querySelector('.daily-goal-container p').innerText = `${hours} h ${minutes} mins/`;
     }
   });
 }
