@@ -146,7 +146,7 @@ span {
 }
 
 .all-time h3 {
-    margin-left: 1rem;
+    margin-left: 2.7rem;
     margin-top: 2rem;
 }
 
@@ -180,7 +180,7 @@ span {
     border-radius: 10px;
     margin-bottom: 2rem;
     border: var(--color-primary) solid 1px;
-    box-shadow: 1px 2px 0px 1px #03045E;
+    box-shadow: 3px 4px 0px 1px #03045E;
 }
 
 .total-sessions, .total-break-time {
@@ -232,17 +232,112 @@ span {
     background: transparent;
 }
 
+.daily h3 {
+    margin-left: 4rem;
+    margin-top: 2rem;
+}
+
+.daily-stats-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
 #calendar {
-    align-self: center;
+    align-self: flex-start;
     margin-top: 1.5rem;
     border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20rem;
     height: 20rem;
+    border: 1px solid black;
+}
+
+.daily-goal {
+    height: 8rem;
+    width: 18rem;
+    margin-left: 4rem;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    padding-left: 1rem;
+}
+
+.daily-goal-container {
+    display: flex;
+    flex-direction: row;
+    width: 12rem;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.daily-goal-container p {
+    margin-left: 0;
+}
+
+#daily-working-hours {
+    width: 5rem;
+    height: 2rem;
+    margin-left: 0;
+}
+
+.edit-daily-goal {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    background-image: url('../images/pencil.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+}
+
+.daily-goal-creator {
+    position: absolute;
+    left: 33rem;
+    top: 15rem;
+    width: 18rem;
+    height: 15rem;
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.daily-goal-creator p {
+    margin-top: 2rem;
+    margin-left: 0;
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0;
+}
+
+.cancel-btn {
+    background-color: var(--color-accent);
+    color: var(--color-black);
+    box-shadow: 1px 2px 0px 1px #03045E;
+}
+
+.cancel-btn:hover {
+    background-color: var(--color-secondary);
+}
+
+.save-btn {
+    box-shadow: 1px 2px 0px 1px #03045E;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 11rem;
+    margin-bottom: 2rem;
 }
 
 .today-stats {

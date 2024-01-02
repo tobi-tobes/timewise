@@ -10,6 +10,7 @@ function formatDate(date) {
   return `${year}-${month}-${day}`;
 }
 
+// Function to display focused minutes worked for a selected day
 function displayWorkingMinutesForSelectedDay(date) {
   const formattedDate = formatDate(date);
 
@@ -25,6 +26,44 @@ function displayWorkingMinutesForSelectedDay(date) {
       const minutes = dailyData % 60;
       const hours = Math.floor(dailyData / 60);
       document.querySelector('.today-stats p span.time').innerText = `${hours} h ${minutes} mins`;
+    }
+  });
+}
+
+// Function to display daily goal
+function displayDailyGoal() {
+  chrome.storage.local.get('dailyGoal', (result) => {
+    dailyGoal = result.dailyGoal || 0;
+
+    if (dailyGoal < 60) {
+      dailyGoalDisplay.innerText = `${dailyGoal} mins`;
+    } else if (dailyData === 60) {
+      dailyGoalDisplay.innerText = `1 h`;
+    } else {
+      const minutes = dailyGoal % 60;
+      const hours = Math.floor(dailyGoal / 60);
+      dailyGoalDisplay.innerText = `${hours} h ${minutes} mins`;
+    }
+  });
+}
+
+// Function to display focused minutes worked for current day
+function displayWorkingMinutesForCurrentDay() {
+  const todayDate = new Date();
+  const formattedDate = formatDate(todayDate);
+
+  chrome.storage.local.get('dailyStorage', (result) => {
+    const storage = result.dailyStorage || {};
+    const todayData = storage[formattedDate] || 0;
+
+    if (todayData < 60) {
+      document.querySelector('.daily-goal-container p').innerText = `${todayData} mins`;
+    } else if (todayData === 60) {
+      document.querySelector('.daily-goal-container p').innerText = `1 h`;
+    } else {
+      const minutes = todayData % 60;
+      const hours = Math.floor(todayData / 60);
+      document.querySelector('.daily-goal-container p').innerText = `${hours} h ${minutes} mins`;
     }
   });
 }
@@ -81,38 +120,65 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
       avgSessionLength.textContent = `${hours} h ${minutes} mins`;
     }
   }
+});
 
-  // DAILY STATS FUNCTIONALITY
-  // Display total working minutes for current date
-  const todayDate = new Date();
+// DAILY STATS FUNCTIONALITY
+// Display total working minutes for current date
+const todayDate = new Date();
 
-  displayWorkingMinutesForSelectedDay(todayDate);
+displayWorkingMinutesForSelectedDay(todayDate);
 
-  // Get all td elements (days) within the calendar to handle clicking of days
-  const days = document.querySelectorAll('.dycalendar-body td');
+// Get all td elements (days) within the calendar to handle clicking of days
+const days = document.querySelectorAll('.dycalendar-body td');
 
-  days.forEach(day => {
-    day.addEventListener('click', function() {
-      // Handle display of data for each day
+days.forEach(day => {
+  day.addEventListener('click', function() {
+    // Handle display of data for each day
 
-      // Retrieve date from HTML elements to use to generate Date object
-      const clickedDay = day.innerHTML;
-      const monthYearString = document.querySelector('.dycalendar-span-month-year').innerHTML;
+    // Retrieve date from HTML elements to use to generate Date object
+    const clickedDay = day.innerHTML;
+    const monthYearString = document.querySelector('.dycalendar-span-month-year').innerHTML;
 
-      // Split the month and year string into an array of [month, year]
-      const [month, year] = monthYearString.split(' ');
+    // Split the month and year string into an array of [month, year]
+    const [month, year] = monthYearString.split(' ');
 
-      // Convert month name to its numerical representation (assuming English month names)
-      const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth();
+    // Convert month name to its numerical representation (assuming English month names)
+    const monthIndex = new Date(Date.parse(`${month} 1, 2000`)).getMonth();
 
-      // Create a Date object using the extracted day, month, and year
-      const selectedDate = new Date(`${year}-${monthIndex + 1}-${clickedDay}`);
+    // Create a Date object using the extracted day, month, and year
+    const selectedDate = new Date(`${year}-${monthIndex + 1}-${clickedDay}`);
 
-      // Use created Date object to retrieve working time from storage
-      displayWorkingMinutesForSelectedDay(selectedDate);
+    // Use created Date object to retrieve working time from storage
+    displayWorkingMinutesForSelectedDay(selectedDate);
 
-      // Display selected date on dashboard
-      document.querySelector('.today-date').innerText = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    });
+    // Display selected date on dashboard
+    document.querySelector('.today-date').innerText = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   });
+});
+
+// DAILY GOAL
+// Display current daily goal
+const dailyGoalDisplay = document.querySelector('.daily-goal span');
+displayWorkingMinutesForCurrentDay();
+displayDailyGoal();
+
+// Set daily goal
+const dailyGoalForm = document.querySelector('.daily-goal-creator');
+const dailyWorkingHoursInput = document.getElementById('daily-working-hours');
+
+dailyGoalForm.addEventListener('submit', () => {
+  event.preventDefault();
+
+  const dailyWorkingHoursGoal = parseInt(dailyWorkingHoursInput.value, 10);
+  chrome.storage.local.set({ 'dailyGoal': dailyWorkingHoursGoal });
+  displayDailyGoal();
+  dailyGoalForm.classList.add('hidden');
+});
+
+// Display amount of hours worked
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'updateCurrentDay') {
+    // Update the UI to display working minutes for current day
+    displayWorkingMinutesForCurrentDay();
+  }
 });

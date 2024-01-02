@@ -42,23 +42,46 @@
                 </section>
                 <!-- DAILY STATS -->
                 <section class="daily">
-                    <div id="calendar" class="dycalendar-container timewise round-edge shadow-timewise">
+                    <h3>Daily Stats</h3>
+                    <div class="daily-stats-container">
+                        <div id="calendar" class="dycalendar-container timewise round-edge shadow-timewise">
+                        </div>
+                        <!-- JavaScript to draw calendar using calendar library -->
+                        <script src="./libraries/dyCalendarJS-1.2.1/js/dycalendar.min.js"></script>
+                        <script>
+                            dycalendar.draw({
+                                target: '#calendar',
+                                type: 'month',
+                                highlighttoday: true,
+                                prevnextbutton : "show"
+                            });
+                        </script>
+                        <div class="daily-goal stats-card">
+                            <h4>Daily goal</h4>
+                            <div class="daily-goal-container">
+                                <p></p><span></span>
+                                <button class="edit-daily-goal"></button>
+                            </div>
+                        </div>
                     </div>
-                    <!-- JavaScript to draw calendar using calendar library -->
-                    <script src="./libraries/dyCalendarJS-1.2.1/js/dycalendar.min.js"></script>
-                    <script>
-                        dycalendar.draw({
-                            target: '#calendar',
-                            type: 'month',
-                            highlighttoday: true,
-                            prevnextbutton : "show"
-                        });
-                    </script>
+                    <form class="daily-goal-creator stats-card hidden">
+                        <p>Update goal</p>
+                        <label for="daily-working-hours" class="hidden">Your goal (mins)</label>
+                        <input type="number" name="daily-working-hours" id="daily-working-hours" min="1">
+                        <div class="button-container">
+                            <button class="cancel-btn" type="button">Cancel</button>
+                            <input type="submit" value="Save" class="save-btn">
+                        </div>
+                    </form>
                     <hr>
                     <div class="today-stats">
                         <p class="today-date"></p>
                         <p>Time spent wisely: <span class="time"></span></p>
                     </div>
+                </section>
+                <!-- WEEKLY STATS -->
+                <section class="weekly hidden">
+                    
                 </section>
             </div>
         </main>

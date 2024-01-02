@@ -233,8 +233,13 @@ $(document).ready(function() {
       updateTotalSessions();
       // Save finished time to daily data
       storeDailyData(Math.ceil((durationInSeconds) / 60));
+      // Send message to content script to update UI on time worked for current day
+      chrome.runtime.sendMessage({ action: 'updateCurrentDay' });
     } else if (request.action === 'saveUnfinishedTime') {
+      // Save time done to daily data
       storeDailyData(request.unfinishedTime);
+      // Send message to content script to update UI on time worked for current day
+      chrome.runtime.sendMessage({ action: 'updateCurrentDay' });
     }
   });
 
