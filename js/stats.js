@@ -40,39 +40,36 @@ $(document).ready(function() {
   // Functionality to draw chart
 
   // Receive weekly data from content script
-  let pastWeekArray;
-  let weekWorkingHours;
-
   window.addEventListener('message', function(event) {
     if (event.source === window && event.data.action === 'drawChart') {
       console.log('Received data:', event.data.data);
-      pastWeekArray = event.data.data.labels;
-      weekWorkingHours = event.data.data.workingHours;
-    }
-  });
+      const pastWeekArray = event.data.data.labels;
+      const weekWorkingHours = event.data.data.workingHours;
 
-  console.log(pastWeekArray);
-  console.log(weekWorkingHours);
+      console.log(pastWeekArray);
+      console.log(weekWorkingHours);
 
-  // Create bar chart using Chart.js library
-  const ctx = document.getElementById('weekly-chart');
+      // Create bar chart using Chart.js library
+      const ctx = document.getElementById('weekly-chart');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: pastWeekArray,
-      datasets: [{
-        label: 'Weekly View',
-        data: weekWorkingHours,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: pastWeekArray,
+          datasets: [{
+            label: 'Weekly View',
+            data: weekWorkingHours,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-      }
+      });
     }
   });
 });
