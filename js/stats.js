@@ -57,15 +57,23 @@ $(document).ready(function() {
         data: {
           labels: pastWeekArray,
           datasets: [{
-            label: 'Weekly View',
+            label: 'Working minutes',
             data: weekWorkingHours,
-            borderWidth: 1
+            borderWidth: 1,
+            borderColor: '#03045E',
+            color: '#03045E',
           }]
         },
         options: {
           scales: {
             y: {
               beginAtZero: true
+            }
+          },
+          labels: {
+            font: {
+              size: 16,
+              family: "'Futura PT', 'Helvetica Neue', Helvetica, Arial, sans-serif"
             }
           }
         }
