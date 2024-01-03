@@ -37,32 +37,39 @@ $(document).ready(function() {
     weeklyView.classList.remove('hidden');
   });
 
-  // Create bar chart using Chart.js library
-  // const ctx = document.getElementById('weekly-chart');
+  // Functionality to draw chart
 
-  // new Chart(ctx, {
-  //   type: 'bar',
-  //   data: {
-  //     labels: pastWeekArray,
-  //     datasets: [{
-  //       label: 'Weekly View',
-  //       data: weekWorkingHours,
-  //       borderWidth: 1
-  //     }]
-  //   },
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         beginAtZero: true
-  //       }
-  //     }
-  //   }
-  // });
+  // Receive weekly data from content script
+  let pastWeekArray;
+  let weekWorkingHours;
 
   window.addEventListener('message', function(event) {
     if (event.source === window && event.data.action === 'drawChart') {
       console.log('Received data:', event.data.data);
-      // Handle the data and draw the chart
+      pastWeekArray = event.data.data.labels;
+      weekWorkingHours = event.data.data.workingHours;
+    }
+  });
+
+  // Create bar chart using Chart.js library
+  const ctx = document.getElementById('weekly-chart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: pastWeekArray,
+      datasets: [{
+        label: 'Weekly View',
+        data: weekWorkingHours,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
     }
   });
 });

@@ -233,9 +233,6 @@ chrome.storage.local.get('dailyStorage', (result) => {
   for (const formattedDate of pastWeekArray) {
     weekWorkingHours.push(storage[formattedDate] || 0);
   }
+  // Send weekly data to stats.js to draw the chart
+  window.postMessage({ action: 'drawChart', data: { labels: pastWeekArray, workingHours: weekWorkingHours } });
 });
-
-console.log(pastWeekArray);
-console.log(weekWorkingHours);
-
-window.postMessage({ action: 'drawChart', data: { labels: pastWeekArray, workingHours: weekWorkingHours } });
