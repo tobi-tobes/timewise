@@ -61,8 +61,7 @@ $(document).ready(function() {
 
   window.addEventListener('message', function(event) {
     if (event.source === window && event.data.action === 'drawChart') {
-      console.log(event.data.data.labels);
-      console.log(event.data.data.workingHours);
+      console.log('Received data:', event.data.data);
       // Handle the data and draw the chart
     }
   });
