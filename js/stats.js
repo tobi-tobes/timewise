@@ -51,16 +51,19 @@ $(document).ready(function() {
     }
   });
 
+  console.log(pastWeekArray);
+  console.log(weekWorkingHours);
+
   // Create bar chart using Chart.js library
   const ctx = document.getElementById('weekly-chart');
 
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: pastWeekArray,
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: 'Weekly View',
+        data: weekWorkingHours,
         borderWidth: 1
       }]
     },
