@@ -68,7 +68,6 @@ main {
     font-weight: var(--font-weight-bold);
     cursor: pointer;
     color: var(--color-white);
-    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 [class*="-btn"]:hover {
@@ -119,6 +118,7 @@ header {
 .stats-btn {
     margin-left: auto;
     color: var(--color-white);
+    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 h1 {
@@ -144,6 +144,7 @@ span {
     margin-bottom: 2rem;
     align-self: center;
     font-weight: 600;
+    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 .preset-timer {
@@ -206,6 +207,7 @@ span {
 
 .start-btn {
     align-self: center;
+    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 #strict-mode-toggle-cb {
@@ -286,6 +288,7 @@ span {
 .back-btn {
     background-color: var(--color-accent);
     color: var(--color-black);
+    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 .back-btn:hover {
@@ -423,6 +426,7 @@ span {
 .modal-btn {
     margin-bottom: 1.5rem;
     margin-top: auto;
+    box-shadow: 1px 2px 0px 1px #03045E;
 }
 
 /* Custom time selection modal ============================= */
