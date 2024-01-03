@@ -238,4 +238,4 @@ chrome.storage.local.get('dailyStorage', (result) => {
 console.log(pastWeekArray);
 console.log(weekWorkingHours);
 
-chrome.runtime.sendMessage({ action: 'drawChart', data: { labels: pastWeekArray, data: weekWorkingHours } });
+window.postMessage({ action: 'drawChart', data: { labels: pastWeekArray, workingHours: weekWorkingHours } });
