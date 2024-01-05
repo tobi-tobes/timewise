@@ -20,8 +20,8 @@ function displayWorkingMinutesForSelectedDay(date) {
 
     if (dailyData < 60) {
       document.querySelector('.today-stats p span.time').innerText = `${dailyData} mins`;
-    } else if (dailyData === 60) {
-      document.querySelector('.today-stats p span.time').innerText = `1 h`;
+    } else if (dailyData % 60 === 0) {
+      document.querySelector('.today-stats p span.time').innerText = `${dailyData / 60} h`;
     } else {
       const minutes = dailyData % 60;
       const hours = Math.round(dailyData / 60);
@@ -36,12 +36,12 @@ let todayData;
 // Function to display daily goal
 function displayDailyGoal() {
   chrome.storage.local.get('dailyGoal', (result) => {
-    dailyGoal = result.dailyGoal || 0;
+    dailyGoal = result.dailyGoal || 60;
 
     if (dailyGoal < 60) {
       dailyGoalDisplay.innerText = `${dailyGoal} mins`;
-    } else if (dailyGoal === 60) {
-      dailyGoalDisplay.innerText = `1 h`;
+    } else if (dailyGoal % 60 === 0){
+      dailyGoalDisplay.innerText = `${dailyGoal / 60} h`;
     } else {
       const minutes = dailyGoal % 60;
       const hours = Math.round(dailyGoal / 60);
@@ -61,8 +61,8 @@ function displayWorkingMinutesForCurrentDay() {
 
     if (todayData < 60) {
       document.querySelector('.daily-goal-container p').innerText = `${todayData} mins/`;
-    } else if (todayData === 60) {
-      document.querySelector('.daily-goal-container p').innerText = `1 h/`;
+    } else if (todayData % 60 === 0) {
+      document.querySelector('.daily-goal-container p').innerText = `${todayData / 60} h/`;
     } else {
       const minutes = todayData % 60;
       const hours = Math.round(todayData / 60);
@@ -85,8 +85,8 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
   let totalTimeSpent = data.totalTimeSpent || 0;
   if (totalTimeSpent < 60) {
     totalTime.textContent = `${totalTimeSpent} mins`;
-  } else if (totalTimeSpent === 60) {
-    totalTime.textContent = '1 h';
+  } else if (totalTimeSpent % 60 === 0) {
+    totalTime.textContent = `${totalTimeSpent / 60} h`;
   } else {
     const minutes = totalTimeSpent % 60;
     const hours = Math.round(totalTimeSpent / 60);
@@ -99,8 +99,8 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
   const totalBreakTimeSpentInMins = Math.round(totalBreakTimeSpent / (1000 * 60));
   if (totalBreakTimeSpentInMins < 60) {
     totalBreakTime.textContent = `${totalBreakTimeSpentInMins} mins`;
-  } else if (totalBreakTimeSpentInMins === 60) {
-    totalBreakTime.textContent = '1 h';
+  } else if (totalBreakTimeSpentInMins % 60 === 0) {
+    totalBreakTime.textContent = `${totalBreakTimeSpentInMins / 60} h`;
   } else {
     const minutes = totalBreakTimeSpentInMins % 60;
     const hours = Math.round(totalBreakTimeSpentInMins / 60);
@@ -115,8 +115,8 @@ chrome.storage.local.get(['totalBreakTime', 'totalTimeSpent', 'totalSessions'], 
     const average = Math.round(totalTimeSpent / totalSessionsCount);
     if (average < 60) {
       avgSessionLength.textContent = `${average} mins`;
-    } else if (average === 60) {
-      avgSessionLength.textContent = '1 h';
+    } else if (average % 60 === 0) {
+      avgSessionLength.textContent = `${average / 60} h`;
     } else {
       const minutes = average % 60;
       const hours = Math.round(average / 60);

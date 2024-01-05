@@ -163,8 +163,11 @@ span {
     font-size: 1.3rem;
     color: var(--color-primary);
     box-shadow: 3px 4px 0px 1px #03045E;
-    background-color: var(--color-white);
     padding-bottom: 2rem;
+    background-image: url('../images/preset-timer-background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .timers {
