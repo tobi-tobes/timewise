@@ -44,7 +44,7 @@ On the Timer Configuration page, toggle between strict and non-strict mode. If y
 ![The timer configuration page](https://i.imgur.com/kHwVLks.png)
 
 ### The Stats Dashboard
-An important part of the *TimeWise* extension is the stats dashboard, which is accessible from the `STATS` link on the extension, or you can access it from ![here](https://tobi-tobes.github.io/timewise/).
+An important part of the *TimeWise* extension is the stats dashboard, which is accessible from the `STATS` link on the extension, or you can access it from [here](https://tobi-tobes.github.io/timewise/).
 
 ![The stats dashboard - daily view](https://i.imgur.com/13Vf2QH.png)
 
