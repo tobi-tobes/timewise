@@ -46,8 +46,8 @@ let countdownInterval;
 
 // Function to update the timer display
 function updateTimerDisplay() {
-  const hours = Math.round(timerState.timeRemaining / 3600);
-  const minutes = Math.round((timerState.timeRemaining % 3600) / 60);
+  const hours = Math.floor(timerState.timeRemaining / 3600);
+  const minutes = Math.floor((timerState.timeRemaining % 3600) / 60);
   const seconds = timerState.timeRemaining % 60;
 
   // Send message to pop-up script to display the time in hours, minutes, and seconds
