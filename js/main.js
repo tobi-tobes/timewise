@@ -91,8 +91,9 @@ $(document).ready(function() {
   });
 
   customTimerBtn.addEventListener('click', () => {
-    // Close stats modal when the 'DONE' button is clicked
+    // Open custom timer modal
     customTimerModal.classList.remove('hidden');
+    customTimerSelectBtn.disabled = true;
   });
 
   // Custom timer modal functionality
@@ -285,6 +286,8 @@ $(document).ready(function() {
   // CUSTOM TIMER MODAL FUNCTIONALITY
   const minutePicker = document.querySelector('.minute-select');
   const hourPicker = document.querySelector('.hour-select');
+  let selectedHour = 0;
+  let selectedMinute = 0;
 
   // Create options for minute select
   for(let i = 0; i < 60; i++) {
@@ -302,9 +305,12 @@ $(document).ready(function() {
 
    // Function to update selectedTime based on user selection
    function updateSelectedTime() {
-    const selectedHour = parseInt(hourPicker.value, 10) || 0; // Convert to integer, default to 0 if not a valid number
-    const selectedMinute = parseInt(minutePicker.value, 10) || 0; // Convert to integer, default to 0 if not a valid number
+    selectedHour = parseInt(hourPicker.value, 10) || 0; // Convert to integer, default to 0 if not a valid number
+    selectedMinute = parseInt(minutePicker.value, 10) || 0; // Convert to integer, default to 0 if not a valid number
     selectedTime = selectedHour + selectedMinute;
+    if (selectedTime !== 0) {
+      customTimerSelectBtn.disabled = false;
+    }
   }
 
   // Event listener for minute select
@@ -314,7 +320,7 @@ $(document).ready(function() {
   hourPicker.addEventListener('change', updateSelectedTime);
 
   customTimerSelectBtn.addEventListener('click', () => {
-    // Close custom timer modal when the 'BACK' button is clicked
+    // Close custom timer modal when the 'SELECT' button is clicked
     customTimerModal.classList.add('hidden');
 
     // Hide the home page
