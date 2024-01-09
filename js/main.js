@@ -74,6 +74,9 @@ $(document).ready(function() {
       strictModeCheckbox.checked = false;
       strictModeToolTip.classList.add('hidden');
 
+      // Make sure textarea is cleared every time before new session
+      siteBlacklistTextarea.value = '';
+
       // Store timer duration in variable for future use
       const time = presetTimer.classList[0];
       const duration = presetTimer.classList[1].replaceAll('-', ' ');
@@ -145,9 +148,6 @@ $(document).ready(function() {
     // Save the updated blockedSites array to chrome.storage
     chrome.storage.local.set({ 'blockedSites': blockedSites });
   }
-
-  // Make sure textarea is cleared every time before new session
-  siteBlacklistTextarea.value = '';
 
   siteBlacklistTextarea.addEventListener('input', () => {
     // Update the site blacklist array
@@ -325,6 +325,13 @@ $(document).ready(function() {
 
     // Hide the home page
     homePage.classList.add('hidden');
+
+    // Make sure strict mode is unchecked at the start of each configuration
+    strictModeCheckbox.checked = false;
+    strictModeToolTip.classList.add('hidden');
+
+    // Make sure textarea is cleared every time before new session
+    siteBlacklistTextarea.value = '';
 
     // Reveal the timer configuration page
     timerConfigPage.classList.remove('hidden');
