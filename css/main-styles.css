@@ -404,12 +404,12 @@ span {
 .modal {
     position: absolute;
     background-color: rgba(var(--color-primary-rgb), 0.6);
-    top: 90px;
+    top: 21.6rem;
     z-index: 1000;
     height: 510px;
     width: 600px;
-    left: 24rem;
-    right: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 0;
 }
 
